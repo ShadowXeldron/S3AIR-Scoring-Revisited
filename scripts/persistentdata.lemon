@@ -1,0 +1,224 @@
+// NOTE TO THOSE MAKING MODIFIED VERSIONS: Change all instances of "ShadowXeldron" to your username (or anything else really) to avoid data corruption.
+// If you're just looking at the code to see how it works, there's no need to do anything
+
+function void scr.saveRankData(u16 act, u8 char, u8 rank, bool forced) // Records rank data to persistent memory. Because P Ranks are the antithesis to the entire mod, they are recorded seperately.
+{
+   string actID = scr.getActID(act)
+   string charID = scr.getCharID(char)
+
+   System.savePersistentData(0x2EBCDA, stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), rank)
+}
+
+function u8 scr.getBestRank(u16 act, u8 char)
+{
+   string actID = scr.getActID(act)
+   string charID = scr.getCharID(char)
+   return System.loadPersistentData(0x2EBCDA, stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), 5) // I honestly can't actually think of a better way to implement this 
+}
+
+function u8 scr.getBestRankString(string actID, u8 char)
+{
+   string charID = scr.getCharID(char)
+   return System.loadPersistentData(0x2EBCDA, stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), 5) // I honestly can't actually think of a better way to implement this 
+}
+
+
+function void scr.savePRank(u16 act, u8 char, bool remove) // Records whether or not you're a passionate pacifist perfectionist pro
+{
+   string actID = scr.getActID(act)
+   string charID = scr.getCharID(char)
+
+   if remove == true
+      System.savePersistentData(0x2E9999, stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), 0) // Strips you of your P rank for being a pile of poo
+   else
+      System.savePersistentData(0x2E9999, stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), 1) // Sets the P rank for that particual act (DDZ doesn't have one)
+}
+
+function bool scr.hasPRank(u16 act, u8 char) // Returns whether or not you're a passionate pacifist perfectionist pro
+{
+   string actID = scr.getActID(act)
+   string charID = scr.getCharID(char)
+
+   return System.loadPersistentData(0x2E9999, stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), 1)
+}
+
+function bool scr.hasPRankString(u16 actID, u8 char) // P Rank checker, but it's not a numberjacl
+{
+   string charID = scr.getCharID(char)
+   return System.loadPersistentData(0x2E9999, stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), 1)
+}
+
+function void scr.saveHighScore(u16 act, u8 char, bool remove) // To be used with global.zone_act
+{
+   string actID = scr.getActID(act)
+   string charID = scr.getCharID(char)
+
+   if remove == true
+      System.savePersistentData(0x2E0000, stringformat("ShadowXeldron-SCR_HighScore_%s_%s", actID, charID), 0) // Removes high score
+   else if scr.levelScore > scr.getHighScore(act, char)
+      System.savePersistentData(0x2E0000, stringformat("ShadowXeldron-SCR_HighScore_%s_%s", actID, charID), scr.levelScore) // Saves high score
+}
+
+function u32 scr.getHighScore(u16 act, u8 char) // for use with global.zone_act
+{
+   string actID = scr.getActID(act)
+   string charID = scr.getCharID(char)
+   return System.loadPersistentData(0x2E0000, stringformat("ShadowXeldron-SCR_HighScore_%s_%s", actID, charID), 0xFFFFFF) // Loads high score
+}
+
+function u32 scr.getHighScoreString(string act, u8 char) // user friendly zone forcing
+{
+   string charID = scr.getCharID(char)
+   return System.loadPersistentData(0x2E0000, stringformat("ShadowXeldron-SCR_HighScore_%s_%s", act, charID), 0xFFFFFF) // Loads high score
+}
+
+// Gen 1 is passable. Gets a C rank for being a good start.
+// Haven't played Gen 2. It's therefore unranked.
+// Gen 3 is, from what I've played, really good! It gets an A rank, but it's close to an A.
+// Gen 4 starts of slow but eventually picks up the slack to become an S rank
+// Gen 5 is the best one. Gets an S rank.
+// Gen 6 is alright. Gets a B rank.
+// To be honest, I don't really dig Gen 7. Gets a D rank for constantly stopping.
+// Gen 8 Sucks; gets an E rank for failing
+// Gen 9 Sucks in all the right ways, not unlike Sonic '06. Gets a P rank for failing miserably.
+
+function string scr.getActID(u16 act) // Returns a string of the act name
+{
+   if (global.zone_act.apparent == 0x0000)
+   {
+      return "AIZ1"
+   }
+
+   else if (global.zone_act.apparent == 0x0001)
+   {
+      return "AIZ2"
+   }
+
+   else if (global.zone_act.apparent == 0x0100)
+   {
+      return "HCZ1"
+   }
+
+   else if (global.zone_act.apparent == 0x0101)
+   {
+      return "HCZ2"
+   }
+
+   else if (global.zone_act.apparent == 0x0200)
+   {
+      return "MGZ1"
+   }
+
+   else if (global.zone_act.apparent == 0x0201)
+   {
+      return "MGZ2"
+   }
+
+   else if (global.zone_act.apparent == 0x0300)
+   {
+      return "CNZ1"
+   }
+
+   else if (global.zone_act.apparent == 0x0301)
+   {
+      return "CNZ2"
+   }
+
+   else if (global.zone_act.apparent == 0x0400)
+   {
+      return "FBZ1"
+   }
+
+   else if (global.zone_act.apparent == 0x0401)
+   {
+      return "FBZ2"
+   }
+
+   else if (global.zone_act.apparent == 0x0500)
+   {
+      return "ICZ1"
+   }
+
+   else if (global.zone_act.apparent == 0x0501)
+   {
+      return "ICZ2"
+   }
+
+   else if (global.zone_act.apparent == 0x0600)
+   {
+      return "LBZ1"
+   }
+
+   else if (global.zone_act.apparent == 0x0601)
+   {
+      return "LBZ2"
+   }
+
+   else if (global.zone_act.apparent == 0x0700)
+   {
+      return "MHZ1"
+   }
+
+   else if (global.zone_act.apparent == 0x0701)
+   {
+     return "MHZ2"
+   }
+
+   else if (global.zone_act.apparent == 0x0800)
+   {
+     return "SOZ1"
+   }
+
+   else if (global.zone_act.apparent == 0x0801)
+   {
+     return "SOZ2"
+   }
+
+   else if (global.zone_act.apparent == 0x0900)
+   {
+     return "LRZ1"
+   }
+
+   else if (global.zone_act.apparent == 0x0901 || global.zone_act.apparent == 0x1600)
+   {
+     return "LRZ2"
+   }
+
+   else if (global.zone_act.apparent == 0x0A00)
+   {
+     return "SSZ"
+   }
+
+   else if (global.zone_act.apparent == 0x0B00)
+   {
+     return "DEZ1"
+   }
+
+   else if (global.zone_act.apparent == 0x0B01 || global.zone_act.apparent == 0x1700)
+   {
+     return "DEZ2"
+   }
+}
+
+function string scr.getCharID(u8 char) // This is used to decide who your charatcer high scores are saved to
+{
+   // Firstly, Huegy
+
+   if u8[0xffffE654] == 0 // Not using an extra slot. This cements you as a real S3AIR player at not one of those ES fakers.
+   {
+      if char == CHARS_SONIC_AND_TAILS
+         return "SonicAndTails"
+      else if char == CHARS_SONIC_ALONE
+         return "SonicAlone"
+      else if char == CHARS_TAILS_ALONE
+         return "TailsAlone"
+      else if char == CHARS_KNUCKLES_ALONE
+         return "KnucklesAlone"
+      else if char == 4
+         return "KnucklesAndTails"  
+   }
+   
+   else // I can't be bothered to add unique handling for every extra slot in existence.
+      return stringformat("ES_%d", u8[0xffffE654])
+
+}

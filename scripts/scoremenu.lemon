@@ -1,0 +1,163 @@
+// Data select and score stuff for my rankings mod which I really need a real name for
+
+global bool scr.scoreMenuIsActive = 0
+
+//# address-hook(0x01ad20) end(0x01af68)
+function void DrawObject()
+{
+    if scr.scoreMenuIsActive == 1
+        return
+    else
+        base.DrawObject()
+}
+
+//# address-hook(0x00d7c0) end(0x00d7e6)
+function void fn00d7c0() // fn00d96a and fn00d7c0 were here
+{
+    if (Input.buttonPressed(BUTTON_Y))
+    {
+        playSound(0xaf)
+        //global.game_mode = 0xEA
+        scr.openScoreMenu() // EA was chosen because Electronic Arts is inherently funny
+    }
+
+    else
+    {
+        base.fn00d7c0()
+    }
+}
+
+// This P rank is dedicated to Imabigsonicfan1234
+
+function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It also contains the worst case of write-only spaghetti code that I have ever produced.
+{
+    scr.scoreMenuIsActive = 1
+
+    u8 currentchar = 0
+
+    while true
+    {
+
+
+
+        // Draw backgrounds
+        //Renderer.drawSprite("bg_dataselect", 100, 100, 0, 0x10, 0xe000)
+
+
+        // Write all of the text
+        Renderer.drawText("oxyfont_regular", 10, 10, stringformat("%d's SCORECARD", currentchar), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        // I need a more effective way of doing this. Right now, we have the functions from hell. I did try a for loop, but it was glitchy.
+        /*
+            Because this code is practically unreadable with all the functions within functions that it has, I may as well explain how it works.
+            This uses the stringformat function to generate a string containing the rank letter and high score for every act. I originally tried to use the internal global.zone_act
+            values for this, but they didn't exactly work 
+        */
+        Renderer.drawText("oxyfont_small", 10, 25, "Angel Island", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 10, 35, stringformat("Act 1: %d %s %s", scr.getHighScoreString("AIZ1", currentchar), scr.rankToLetter(scr.getBestRankString("AIZ1", currentchar)), scr.isPLetter("AIZ1", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 10, 45, stringformat("Act 2: %d %s %s", scr.getHighScoreString("AIZ2", currentchar), scr.rankToLetter(scr.getBestRankString("AIZ2", currentchar)), scr.isPLetter("AIZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        Renderer.drawText("oxyfont_small", 10, 65, "Hydrocity", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 10, 75, stringformat("Act 1: %d %s %s", scr.getHighScoreString("HCZ1", currentchar), scr.rankToLetter(scr.getBestRankString("HCZ1", currentchar)), scr.isPLetter("HCZ1", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 10, 85, stringformat("Act 2: %d %s %s", scr.getHighScoreString("HCZ2", currentchar), scr.rankToLetter(scr.getBestRankString("HCZ2", currentchar)), scr.isPLetter("HCZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        Renderer.drawText("oxyfont_small", 10, 105, "Marble Garden", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 10, 115, stringformat("Act 1: %d %s %s", scr.getHighScoreString("MGZ1", currentchar), scr.rankToLetter(scr.getBestRankString("MGZ1", currentchar)), scr.isPLetter("MGZ1", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 10, 125, stringformat("Act 2: %d %s %s", scr.getHighScoreString("MGZ2", currentchar), scr.rankToLetter(scr.getBestRankString("MGZ2", currentchar)), scr.isPLetter("MGZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        Renderer.drawText("oxyfont_small", 10, 145, "Carnival Night", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 10, 155, stringformat("Act 1: %d %s %s", scr.getHighScoreString("CNZ1", currentchar), scr.rankToLetter(scr.getBestRankString("CNZ1", currentchar)), scr.isPLetter("CNZ1", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 10, 165, stringformat("Act 2: %d %s %s", scr.getHighScoreString("CNZ2", currentchar), scr.rankToLetter(scr.getBestRankString("CNZ2", currentchar)), scr.isPLetter("CNZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        Renderer.drawText("oxyfont_small", 10, 185, "Ice Cap", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 10, 195, stringformat("Act 1: %d %s %s", scr.getHighScoreString("ICZ1", currentchar), scr.rankToLetter(scr.getBestRankString("ICZ1", currentchar)), scr.isPLetter("ICZ1", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 10, 205, stringformat("Act 2: %d %s %s", scr.getHighScoreString("ICZ2", currentchar), scr.rankToLetter(scr.getBestRankString("ICZ2", currentchar)), scr.isPLetter("ICZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        Renderer.drawText("oxyfont_small", 130, 25, "Launch Base", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 130, 35, stringformat("Act 1: %d %s %s", scr.getHighScoreString("LBZ1", currentchar), scr.rankToLetter(scr.getBestRankString("LBZ1", currentchar)), scr.isPLetter("LBZ1", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 130, 45, stringformat("Act 2: %d %s %s", scr.getHighScoreString("LBZ2", currentchar), scr.rankToLetter(scr.getBestRankString("LBZ2", currentchar)), scr.isPLetter("LBZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        Renderer.drawText("oxyfont_small", 130, 65, "Mushroom Hill", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 130, 75, stringformat("Act 1: %d %s %s", scr.getHighScoreString("MHZ1", currentchar), scr.rankToLetter(scr.getBestRankString("MHZ1", currentchar)), scr.isPLetter("MHZ1", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 130, 85, stringformat("Act 2: %d %s %s", scr.getHighScoreString("MHZ2", currentchar), scr.rankToLetter(scr.getBestRankString("MHZ2", currentchar)), scr.isPLetter("MHZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        Renderer.drawText("oxyfont_small", 130, 105, "Flying Battery", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 130, 115, stringformat("Act 1: %d %s %s", scr.getHighScoreString("FBZ1", currentchar), scr.rankToLetter(scr.getBestRankString("FBZ1", currentchar)), scr.isPLetter("FBZ1", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 130, 125, stringformat("Act 2: %d %s %s", scr.getHighScoreString("FBZ2", currentchar), scr.rankToLetter(scr.getBestRankString("FBZ2", currentchar)), scr.isPLetter("FBZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        Renderer.drawText("oxyfont_small", 130, 145, "Sandopolis", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 130, 155, stringformat("Act 1: %d %s %s", scr.getHighScoreString("SOZ1", currentchar), scr.rankToLetter(scr.getBestRankString("SOZ1", currentchar)), scr.isPLetter("SOZ1", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 130, 165, stringformat("Act 2: %d %s %s", scr.getHighScoreString("SOZ2", currentchar), scr.rankToLetter(scr.getBestRankString("SOZ2", currentchar)), scr.isPLetter("SOZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        Renderer.drawText("oxyfont_small", 130, 185, "Lava Reef", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 130, 195, stringformat("Act 1: %d %s %s", scr.getHighScoreString("LRZ1", currentchar), scr.rankToLetter(scr.getBestRankString("LRZ1", currentchar)), scr.isPLetter("LRZ1", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 130, 205, stringformat("Act 2: %d %s %s", scr.getHighScoreString("LRZ2", currentchar), scr.rankToLetter(scr.getBestRankString("LRZ2", currentchar)), scr.isPLetter("LRZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        Renderer.drawText("oxyfont_small", 210, 25, "Sky Sanctuary", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 210, 35, stringformat("Act 1: %d %s %s", scr.getHighScoreString("SSZ", currentchar), scr.rankToLetter(scr.getBestRankString("SSZ", currentchar)), scr.isPLetter("SSZ", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        // Renderer.drawText("oxyfont_tiny", 210, 45, stringformat("Act 1: %d %s %s", scr.getHighScoreString("SSZ2", currentchar), scr.rankToLetter(scr.getBestRankString("SSZ2", currentchar)), scr.isPLetter("SSZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        Renderer.drawText("oxyfont_small", 210, 65, "Death Egg", 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 210, 75, stringformat("Act 1: %d %s %s", scr.getHighScoreString("DEZ1", currentchar), scr.rankToLetter(scr.getBestRankString("DEZ1", currentchar)), scr.isPLetter("DEZ1", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_tiny", 210, 85, stringformat("Act 2: %d %s %s", scr.getHighScoreString("DEZ2", currentchar), scr.rankToLetter(scr.getBestRankString("DEZ2", currentchar)), scr.isPLetter("DEZ2", currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+
+        if (Input.buttonPressed(BUTTON_LEFT))
+            if currentchar == 0
+                currentchar = 4
+            else
+                currentchar -= 1
+            
+        
+        if (Input.buttonPressed(BUTTON_RIGHT))
+            if currentchar == 4
+                currentchar = 0
+            else
+                currentchar += 1
+            //Audio.playAudio(SFX_CLICK)
+        
+
+        if (Input.buttonPressed(BUTTON_B))
+            break
+        
+        waitForNextFrame() // The game dies of heart failure if you don't include this
+    }
+
+    scr.scoreMenuIsActive = 0
+    //global.game_mode = 0x4c
+}
+
+function string scr.isPLetter(string act, u8 char) // Used to spit out the P rank boolean
+{
+    if scr.hasPRankString(act, char) == true
+        return "P"
+    else
+        return " " // blank space for people who aren't P at the game
+}
+
+// Tempo was here. Someone should probably introduce him to ToeJam and Earl; they'd probably all get along just fine.
+
+function void DataSelect.drawCustomPlanes()
+{
+	// Draw our own widescreen version of the background
+	// TODO: The actual background still gets rendered, though it's not visible at all
+	//  -> Maybe the plane W is used here?
+	Renderer.drawCustomSprite("background-a", getScreenExtend() - 40, 0, 0x00, 0, 0x2000)
+
+	// Custom rendering of plane B (which is not the background here) to ignore the wrapping
+	s16 px = s16(camera.foreground.x.u16)
+	if (px < 0)
+	{
+		Renderer.enableDefaultPlane(2, false)
+		Renderer.setupPlane(-px, 0, getScreenWidth() + px, getScreenHeight(), 0x10, 0, 0x3000)
+	}
+	else if (px > 0x400 - getScreenWidth())
+	{
+		Renderer.enableDefaultPlane(2, false)
+		Renderer.setupPlane(0, 0, 0x400 - px, getScreenHeight(), 0x10, 0, 0x3000)
+	}
+}
+
+function u64 scr.getDataSelectBackground()
+{
+    return "bg_dataselect"
+}

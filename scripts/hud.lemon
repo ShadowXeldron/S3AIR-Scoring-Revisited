@@ -1,0 +1,37 @@
+/*
+	This script file is part of the Sonic 3 A.I.R. script software distribution.
+	Copyright (C) 2017-2022 by Eukaryot
+
+	Published under the GNU GPLv3 open source software license, see license.txt
+	or https://www.gnu.org/licenses/gpl-3.0.en.html
+*/
+
+//-------------------------------------------------------//
+// HUD display                                           //
+//-------------------------------------------------------//
+
+//# address-hook(0x00db44) end(0x00dbb2)
+function void RenderHUD()
+{
+	// Removed all "if standalone" blocks because, let's be honest, nobody uses the oxygen engine and just plays the standalone S3AIR.
+	
+	bool nonScoringZone = (global.zone_act.apparent == 0x1300 || global.zone_act.apparent == 0x1400 || global.zone_act.apparent == 0x1500 || global.zone_act.apparent == 0x1601 || global.zone_act.apparent == 0x0a01 || global.zone_act.apparent == 0x0c00)
+		
+	// Temporary HUD because I can't draw
+	Renderer.drawText("oxyfont_small", 10, 10, stringformat("Score: %d", scr.levelScore), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", 10, 20, stringformat("Rings: %d", ring_counter), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", 10, 30, stringformat("Time: %d'%d''%d", timer.minutes, timer.seconds, timer.frames), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", 10, 40, stringformat("Lives: %d", lives_counter), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", 10, 50, stringformat("Cool Bonus: %d", scr.coolBonus * 10), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", 10, 60, stringformat("Total Score: %d", player.score * 10), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", 10, 100, stringformat("Level ID: %04x", global.zone_act.apparent), 0xffffffff, 1, 0, 0xe000, 0)
+
+	if (!nonScoringZone)
+	{
+		Renderer.drawText("oxyfont_small", 10, 70, stringformat("Rank: %d", scr.getStageRank()), 0xffffffff, 1, 0, 0xe000, 0)
+		Renderer.drawText("oxyfont_small", 10, 80, stringformat("Best Rank: %d", scr.getBestRank(global.zone_act.apparent, global.characters)), 0xffffffff, 1, 0, 0xe000, 0)
+		Renderer.drawText("oxyfont_small", 10, 90, stringformat("High Score: %d", scr.getHighScore(global.zone_act.apparent, global.characters)), 0xffffffff, 1, 0, 0xe000, 0)
+	}
+}
+
+// The solution was, of course, to go at all the vanilla code with a hatchet.

@@ -1,0 +1,20 @@
+// The mandatory audio script for my rankings mod
+
+function u64 Standalone.getModdedSoundKey(u64 soundKey, u8 sfxId, u8 soundRegType)
+{
+    if (sfxId == 0x29) // Actclears
+    {
+        if global.zone_act.apparent == 0x1700 // DEZ2; well okay it's actually DDZ2 but still
+        {
+            soundKey = "32_sonic3"
+        }
+
+        else
+        {
+            return base.Standalone.getModdedSoundKey(soundKey, sfxId, soundRegType)
+        }
+    }
+
+    
+    return base.Standalone.getModdedSoundKey(soundKey, sfxId, soundRegType)
+}

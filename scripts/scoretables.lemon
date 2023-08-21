@@ -1,0 +1,449 @@
+// Constant array file for Score Revisted
+
+/*
+HOW TO USE
+
+Create a u32 array using the following template
+
+constant array<u32> ZONENAME =
+{
+    S Rank Requirement,
+    A Rank Requirement,
+    B Rank Requirement,
+    C Rank Requirement,
+    D Rank Requirement,
+    Pacifist Requirement
+}
+
+Anything below A rank will be tested against B rank and so forth. If the D rank check fails, you'll be given an E rank and will be crowned a Fake Sonic Fan. The shame of it all!
+You can only get the P rank if you got a sufficiently low score.
+*/
+
+
+function u8 scr.getStageRank() // This returns a u8 value to represent the rank
+{
+    u8 rank
+
+    // First, the zone check
+
+    // I should REALLY find a better way of doing this. That weird thing with the colons may be an idea.
+
+    if scr.levelScore <= scr.getStageRankRequirement(5)
+        rank = 7 // P
+    else if ((scr.levelScore >= scr.getStageRankRequirement(0)) && (scr.coolBonusBackup == 1000)) // You need to beat the level without taking damage to get the S rank
+        rank = 6 // S
+    else if ((scr.levelScore >= scr.getStageRankRequirement(1)) && (scr.coolBonusBackup != 0)) // You need to beat the level without dying or getting hit 10 times to get the A rank
+        rank = 5 // A
+    else if scr.levelScore >= scr.getStageRankRequirement(2)
+        rank = 5 // B
+    else if scr.levelScore >= scr.getStageRankRequirement(3)
+        rank = 3 // C
+    else if scr.levelScore >= scr.getStageRankRequirement(4)
+        rank = 2 // D
+    else if scr.levelScore <= scr.getStageRankRequirement(4)
+        rank = 1 // E
+    else
+        rank = 0 // No rank.
+
+    // Now for the debug thing (NOTE TO SELF: Move this up later and make it require debug mode to be active)
+
+    /*
+    else if temp.rankIcon == 0
+		rank = 0
+	else if temp.rankIcon == 1
+		rank = 1
+	else if temp.rankIcon == 2
+		rank = 2
+	else if temp.rankIcon == 3
+		rank = 3
+    else if temp.rankIcon == 4
+		rank = 3
+	else
+		rank = 4*/
+    
+    return rank
+
+}
+
+constant array<u32> AIZ1 =
+{
+    30000, // S
+    22000, // A
+    16000, // B
+    11000, // C
+    9000, // D
+    1001 // P
+}
+
+constant array<u32> AIZ2 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // 
+    1001 // P
+}
+
+constant array<u32> HCZ1 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1001 // P
+}
+
+constant array<u32> HCZ2 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1001 // P
+}
+
+constant array<u32> MGZ1 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1001 // P
+}
+
+constant array<u32> MGZ2 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1001 // P
+}
+
+constant array<u32> CNZ1 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1001 // P
+}
+
+constant array<u32> CNZ2 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1000 // P
+}
+
+constant array<u32> ICZ1 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1000 // P
+}
+
+constant array<u32> ICZ2 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1000 // P
+}
+
+constant array<u32> LBZ1 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1000 // P
+}
+
+constant array<u32> LBZ2 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    2000 // P
+}
+
+constant array<u32> MHZ1 =
+{
+    34000, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1000 // P
+}
+
+constant array<u32> MHZ2 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1000 // P
+}
+
+constant array<u32> FBZ1 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1000 // P
+}
+
+constant array<u32> FBZ2 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1000 // P
+}
+
+
+constant array<u32> SOZ1 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1000 // P
+}
+
+constant array<u32> SOZ2 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1001 // P
+}
+
+constant array<u32> LRZ1 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1000 // P
+}
+
+constant array<u32> LRZ2 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1000 // P
+}
+
+constant array<u32> SSZ =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    3000 // P
+}
+
+/*constant array<u32> SSZ_AND_KNUCKLES = // Do I really need this?
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1001 // P
+}*/
+
+constant array<u32> DEZ1 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1001 // P
+}
+
+constant array<u32> DEZ2 =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    2001 // P
+}
+
+/*
+constant array<u32> DDZ =
+{
+    32500, // S
+    20000, // A
+    16000, // B
+    11000, // C
+    7000, // D
+    1001 // P
+}*/
+
+function u32 scr.getStageRankRequirement(u8 rank)
+{
+    if (global.zone_act.apparent == 0x0000)
+    {
+       return AIZ1[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0001)
+    {
+       return AIZ2[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0100)
+    {
+       return HCZ1[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0101)
+    {
+       return HCZ2[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0200)
+    {
+       return MGZ1[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0201)
+    {
+       return MGZ2[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0300)
+    {
+       return CNZ1[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0301)
+    {
+       return CNZ2[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0400)
+    {
+       return FBZ1[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0401)
+    {
+       return FBZ2[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0500)
+    {
+       return ICZ1[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0501)
+    {
+       return ICZ2[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0600)
+    {
+       return LBZ1[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0601)
+    {
+       return LBZ2[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0700)
+    {
+       return MHZ1[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0701)
+    {
+       return MHZ2[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0800)
+    {
+       return SOZ1[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0801)
+    {
+       return SOZ2[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0900)
+    {
+       return LRZ1[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0901 || global.zone_act.apparent == 0x1600)
+    {
+       return LRZ2[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0A00)
+    {
+        // Tails can skip both of the SSZ rehash bosses and as such has a lower P Rank requirement than his "brother".
+       if (rank == 1 && (global.characters == CHARS_SONIC_AND_TAILS || global.characters == CHARS_TAILS_ALONE || global.characters == CHARS_TAILS_ALONE))
+       {
+           return 1000
+       }
+       else
+       {
+           return SSZ[rank]
+       }
+    
+    }
+
+    else if (global.zone_act.apparent == 0x0B00)
+    {
+       return DEZ1[rank]
+    }
+
+    else if (global.zone_act.apparent == 0x0B01 || global.zone_act.apparent == 0x1700)
+    {
+       return DEZ2[rank]
+    }
+}
+
+
+
+// Spoiler: Master Chief beats the Icon of Sin and causes Tallon IV to explode. He is then taken in by the G-Man and will only awaken to fight North Korea in the jungle.

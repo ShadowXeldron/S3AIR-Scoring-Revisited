@@ -1,0 +1,14 @@
+{
+	"results-s":      { "File": "ResultsA.ogg", "Type": "Music", "LoopStart": "100352", "Name": "Sonic Frontiers - Cyberspace Results (S Rank)" },
+	"results-a":      { "File": "ResultsA.ogg", "Type": "Music", "LoopStart": "100352", "Name": "Sonic Frontiers - Cyberspace Results (S Rank)" },
+	"results-b":      { "File": "Results.ogg", "Type": "Music", "LoopStart": "86016", "Name": "Sonic Frontiers - Cyberspace Results" },
+	"results-c":      { "File": "Results.ogg", "Type": "Music", "LoopStart": "86016", "Name": "Sonic Frontiers - Cyberspace Results" },
+	"results-d":      { "File": "Results.ogg", "Type": "Music", "LoopStart": "86016", "Name": "Sonic Frontiers - Cyberspace Results" },
+	"results-e":      { "File": "ResultsE.ogg", "Type": "Music", "LoopStart": "602112", "Name": "You can guess" },
+	"results-p":      { "File": "ResultsA.ogg", "Type": "Music", "LoopStart": "100352", "Name": "Sonic Frontiers - Cyberspace Results (S Rank)" },
+	//"results-p":      { "File": "Pointless.ogg", "Type": "Music", "LoopStart": "0", "Name": "BBC Pointless Theme Tune" },
+	
+	// Sound effects
+	"tada":      { "File": "FlawlessVictory.ogg", "Type": "Sound" }, // Windows 3.1 Tada
+	"newrecord": { "File": "NewRecord.ogg", "Type": "Sound" } // Mario 64 Star Catch Fanfare
+}
