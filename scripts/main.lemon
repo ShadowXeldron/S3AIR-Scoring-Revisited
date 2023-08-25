@@ -1,0 +1,99 @@
+/*
+    TO-DO LIST
+
+    - Actually add a real scoring system (HIGH PRIORITY!)
+    - Asterisks by the ranks if you're a speedy African feline; similar to what Frontiers does
+    - High score system that is recorded as save data (outright refuse to save score if debug mode is enabled at any point)
+    - Per-character scorecards accessible from the save select screen
+
+    WOULD BE NICE
+
+    - Moddable rank requirements for level creators
+    - A super top secret bonus for those who can get all the A ranks
+    - Overly dramatic E rank poses for the Unleashed fans in the back
+    - Extra slot support (low priority because I don't actually like let alone use extra slots because they hog all the spotlight on the forums)
+    - Achievements plus support (should be banished to its own script file to maintain compatibility)
+
+*/
+
+// Other scripts to keep things neat and tidy
+include results // Note to self: This isn't Lua. We use "include" here, not "reqiure"
+include hud // HUD edits
+include scoretables // Arrays containing all the stuff
+include persistentdata
+include scoremenu
+include obligatoryaudiostuff // Absolutely mandatory for any mod I make
+#if ACHIEVEMENTS_PLUS_ACTIVE
+include achievements  // If Achievements Plus is installed, gain access to achievements designed to use it
+#endif
+
+// Global variables
+global u32 scr.levelScore = 0 // Seperate scoring value for the mod
+global u16 scr.coolBonus = 0 // The cool bonus from Sonic Mania. It starts at 1000 and is subtracted by 100 every time you get hit. In addition, dying will set it to 0.
+global u16 scr.coolBonusBackup = 0 // Cool bonus backup. This is only used to help with score scaling and therefore does nothing.
+global bool scr.shutmeup = 0 // Used soley to pevent a sound effect from going crazy
+global bool scr.isUsingCheats = 0 // This will be set to 1 if you use a "cheating" mod and will place an astersik by your ranking as well as prevent you fron getting S or P ranks
+
+// Config variables
+global u8 temp.rankIcon // Remove when an actual score system is added
+global u8 rankSprites // Toggle between custom sprites and ones based on SA2
+
+function void addScore(u32 value)
+{
+    if global.game_mode != 0x48	
+        scr.levelScore += value * 10 // Adds to the level score
+
+    base.addScore(value)
+    // Call the base function once its over
+}
+
+function void Standalone.onLevelStart()
+{
+    scr.shutmeup = 0
+    scr.levelScore = 0
+    scr.coolBonus = 1000 // The player's visible score is actually 10 times what it actually is. In game, this means that the Cool Bonus appears as 10000 but is actually 1000.
+    base.Standalone.onLevelStart()
+}
+
+function void Character.GettingHurt()
+{
+    if (A0 == 0xffffb000 && scr.coolBonus != 0) // Since Player 2 exists soley to be a minor inconvenience, we're not counting the many injuries that Pixel Brain gets subjected to
+        scr.coolBonus -= 100 // Subtracts cool bonus by 100 regardless of whether or not you have a shield.
+        scr.coolBonusBackup = scr.coolBonus
+    base.Character.GettingHurt()
+}
+
+function void Standalone.onDeath()
+{
+    scr.coolBonus = 0 // Dying sets your cool bonus to 0 because you aren't cool
+    scr.coolBonusBackup = scr.coolBonus
+    base.Standalone.onDeath()
+}
+
+function void restartAtCheckpoint() // Don't go thinking you can get out of a sticky situation by restarting at a checkpoint
+{
+    if checkpoint.number == 0 // To be fair, if you haven't hit any checkpoints you're basically doing the level again from the beginning.
+        scr.coolBonus = 1000
+    else
+        scr.coolBonus = 0
+    scr.coolBonusBackup = scr.coolBonus
+    base.restartAtCheckpoint()
+}
+
+function string scr.rankToLetter(u8 rank) // Gives you a rank letter. Does not include P Ranks because they are saved seperately.
+{
+    if rank == 0
+        return " " // Returns a finger space to serve as an empty
+    else if rank == 1
+        return "E" 
+    else if rank == 2
+        return "D" 
+    else if rank == 3
+        return "C" 
+    else if rank == 4
+        return "B" 
+    else if rank == 5
+        return "A" 
+    else if rank == 6
+        return "S" 
+}
