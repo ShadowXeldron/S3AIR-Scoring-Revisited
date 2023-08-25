@@ -1,0 +1,45 @@
+{
+	"Metadata":
+	{
+		"Name": "Scoring Revisited",
+		"UniqueID": "ShadowXeldron-ScoringRevisted",
+		"Author": "ShadowXeldron",
+		"Description": "Scoring overhaul mod for Sonic 3 AIR with a Sonic Adventure 2 inspired ranking system. Can you get the elusive A rank?",
+		"URL": "https://github.com/ShadowXeldron/ShadowXeldrons-S3AIR-Mods",
+		"ModVersion": "1.0"
+	}
+	,
+	"Settings":
+	{
+		"List":
+		[
+			{
+				"InternalName": "TEMPORARY_WILL_BE_REMOVED_RankIcon",
+				"DisplayName": "Rank Icon",
+				"Category": "REMOVE WHEN CUSTOM SCORING SYSTEM ADDED",
+				"Variable": "temp.rankIcon",
+				"DefaultValue": "0",
+				"Options":
+				{
+					"0": "A",
+					"1": "B",
+					"2": "C",
+					"3": "D",
+					"4": "E"
+				}
+			},
+			{
+				"InternalName": "RankingSprites",
+				"DisplayName": "Rank Sprites",
+				"Category": "Appearance",
+				"Variable": "rankSprites",
+				"DefaultValue": "0",
+				"Options":
+				{
+					"0": "Custom",
+					"1": "SA2",
+				}
+			},
+		]
+	}
+}
