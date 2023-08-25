@@ -133,6 +133,7 @@ function void LevelResults.UpdateBonusCounting()
 
 		scr.saveHighScore(global.zone_act.apparent, global.characters, 0)
 		if scr.getStageRank() > scr.getBestRank(global.zone_act, global.characters)
+			Audio.playAudio("newrecord") // Da da da da daaaaa!
 			scr.saveRankData(global.zone_act.apparent, global.characters, scr.getStageRank(), 0) // Records your best rank.
 
 		Renderer.drawSprite(getRankSprite(), 175, 35, 100, 0x40, 0xe000)
