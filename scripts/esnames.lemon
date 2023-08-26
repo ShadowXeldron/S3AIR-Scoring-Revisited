@@ -1,0 +1,270 @@
+// Since the forums basically worship the extra slots, here's a namegen algorithm for them
+// Names from here but not followeed religiously: https://github.com/Cloudydude/ECSv8-Character-ID-Randomizer/blob/main/src/json/characters.json
+// I don't know what's damaged my brain more - playing 32X games or reading that damn list.
+
+// Released or downloadable WIP skins on GameBanana take priority over unreleased ones that are reserved. You can't play as water vapour, can you?
+// With that said, skins with no moveset changes have a lower priority than ones that do. Custom handling will be added for when there's mod clash
+
+constant array<string> SCR_ESNAMES = // Let's be real I haven't heard of most of these extra slots and they're probably all vapourware
+{
+    "Mighty", // 1
+    "Ray", // 2
+    "Amy". // 3
+    "Metal Sonic Kai", // 4
+    "Shadow", // 5
+    "Seafoam", // 6
+    "Another Amy Rose", // 7
+    "Metal Knuckles", // 8
+    "Fang", // 9; He's called Fang the Sniper. Not Nack the Weasel and not Fang the Hunter, he goes by Fang the Sniper. End of.
+    "", // 10
+    "", // 11
+    "", // 12
+    "", // 13
+    "", // 14
+    "Lunarre", // 15
+    "Chiba Ayumi", // 16
+    "Kit", // 17
+    "Cream", // 18
+    "Edition's Fang", // 19
+    "Extra Life", // 20
+    "Rouge & Astra", // 21; whoever comes out first gets the title spot
+    "CA22 Sonic", // 22
+    "Geometry Dash Icon", // 23
+    "Barry Steakfries", // 24
+    "Peashooter", // 25
+    "Espio", // 26
+    "", // 27; no announcement no reservation
+    "", // 28; JSevion stop being greedy
+    "Reyn", // 29; NOW IT'S REYN TIME
+    "Ultimate Metal", // 30
+    "Bunfriend", // 31
+    "Tempo", // 32; I'm well aware that this slot is supposed to be reserved for Chaos, but Tempo is funkier and I've seen way more of the Tempo mod than the Chaos ES conversion.
+    "King the Memer", // 33
+    "King the Memer (Decomp)", // 34
+    "King the Memer (AIR)", // 35, seriously king the memer why do you need three different slots reserved for variations of the same character
+    "Smoke", // 36
+    "Lilly", // 37
+    "Luna", // 38
+    "", // 39
+    "", // 40
+    "El Macho", // 41
+    "Meat Boy", // 42
+    "", // 43
+    "Alice", // 44
+    "", // 45
+    "Kitsunami", // 46
+    "Unfunny Discord Meme", // 47; actually :fefe: but that meme ruined Sawnik for me
+    "Zack", // 48
+    "", // 49
+    "", // 50
+    "", // 51
+    "Aurora", // 52
+    "", // 53
+    "", // 54
+    "", // 55
+    "Cuphead", // 56
+    "Aurora", // 57
+    "", // 58
+    "", // 59
+    "", // 60
+    "", // 61
+    "", // 62
+    "Albert", // 63
+    "Monty", // 64
+    "", // 65
+    "Blaze", // 66
+    "", // 67
+    "", // 68
+    "", // The worst number
+    "", // 70
+    "", // 71
+    "", // 72
+    "The Noise", // 73
+    "", // 74
+    "", // 75
+    "", // Fallout 76
+    "", // 77; while Parliment has reserved this slot it's labeled as TBD, which to me means "to be canceled without "
+    "", // 78
+    "", // 79
+    "", // 80
+    "", // 81
+    "Shift", // 82
+    "Gear", // 83
+    "", // 84
+    "SMW Mario", // 85
+    "Sally Acorn", // 86
+    "Link", // 87
+    "", // 88; it's listed as just [CHARACTER]. I'm assuming it's just a placeholder and will therefore be ignoring it unless I am told otherwise
+    "Mario", // 89; S3K Styled Mario specifically
+    "", // 90
+    "Master System Sonic", // 91
+    "Pana", // 92, Pana der Hejhog in full
+    "", // 93
+    "Kirby", // 94
+    "Waddle Dee", // 95
+    "", // 96
+    "", // 97
+    "", // 98
+    "C.H.C Jester", // 99
+    "Ashuro", // 100, not to be confusted with Ashura. This guy's apparently a badger.
+    "", // 101
+    "", // 102
+    "", // 103
+    "", // 104
+    "", // 105; this is marked as a template and will be ignored
+    "", // 106; this is marked as a template and will be ignored
+    "", // 107; this is marked as a template and will be ignored
+    "", // 108; this is marked as a template and will be ignored
+    "Terios", // 109
+    "", // 110
+    "", // 111
+    "", // 112
+    "", // 113
+    "", // 114
+    "", // 115
+    "", // 116
+    "", // 117
+    "", // 118
+    "", // 119
+    "", // 120
+    "", // 121
+    "Pocket Adventure Knuckles", // 122
+    "Pocket Adventure Tails", // 123
+    "Pocket Adventure Sonic", // 124
+    "Pizzelle", // 125
+    "Silver", // 126
+    "", //  127
+    "", // 128
+    "", // 129
+    "", // 130
+    "", // 131
+    "", // 132
+    "", // 133
+    "", // 134
+    "", // 135
+    "", // 136
+    "", // 137
+    "", // 138
+    "", // 139
+    "", // 140
+    "", // 141
+    "", // 142; listed as TBD. I consider this slothogging and therefore will be ignoring it.
+    "", // 143; listed as TBD. I consider this slothogging and therefore will be ignoring it.
+    "", // 144; listed as TBD. I consider this slothogging and therefore will be ignoring it.
+    "", // 145
+    "", // 146
+    "", // 147
+    "", // 148
+    "", // 149
+    "", // 150
+    "", // 151; somebody needs to make an ES Mew to go here
+    "", // 152
+    "", // 153
+    "", // 154
+    "Roxy", // 155
+    "Davil", // 156
+    "", // 157; ; listed as TBR. I consider this slothogging and therefore will be ignoring it.
+    "", // 158
+    "", // 159
+    "", // 160
+    "", // 161
+    "", // 162
+    "Mecha Sonic", // 163; I refuse to use Mk. 2 when refering to Mecha Sonic. The guy in Sonic 2 is Robo Sonic and the thing from 8-bit Sonic 2 is Silver Sonic. END OF!
+    "Mecha Knuckles", // 164
+    "Rayman", // 165
+    "Megamix Shadow", // 166
+    "", // 167
+    "Ashura", // 168
+    "", // 169
+    "", // 170
+    "", // 171
+    "", // 172
+    "", // 173
+    "", // 174
+    "", // 175
+    "", // 176
+    "", // 177
+    "", // 178
+    "", // 179
+    "", // 180
+    "", // 181
+    "", // 182
+    "", // 183
+    "", // 184
+    "", // 185
+    "", // 186
+    "", // 187
+    "", // 188
+    "", // 189
+    "", // 190
+    "", // 191
+    "", // 192
+    "", // 193
+    "", // 194
+    "", // 195
+    "", // 196
+    "", // 197
+    "", // 198
+    "", // 199
+    "", // 200
+    "", // 201
+    "", // 202
+    "", // 203
+    "", // 204
+    "", // 205
+    "", // 206
+    "Buster Bunny", // 207; yes somebody really has reserved a spot for an Arthur character
+    "", // 208
+    "", // 209
+    "", // 210
+    "", // 211
+    "", // 212
+    "", // 213
+    "Snick", // 214
+    "", // 215
+    "", // 216
+    "", // 217
+    "", // 218
+    "", // 219
+    "", // 220
+    "", // 221
+    "", // 222
+    "", // 223
+    "", // 224
+    "", // 225
+    "", // 226
+    "", // 227
+    "", // 228
+    "", // 229
+    "", // 230
+    "", // 231
+    "Yang", // 232
+    "", // 233
+    "", // 234
+    "", // 235
+    "", // 236
+    "", // 237
+    "", // 238
+    "", // 239
+    "Quote", // 240
+    "Curly", // 241
+    "Megamix Sonic", // 242
+    "Adventure Sonic", // 243
+    "Misery", // 244; I definitely agree that Megamix Sonic and Adventure Sonic are my favourite Cave Story characters.
+    "", // 245
+    "", // 246
+    "", // 247
+    "", // 248
+    "", // 249
+    "", // 250
+    "", // 251
+    "", // 252
+    "", // 253
+    "", // 254
+    "Sage" // 255, which thankfully means that the list is over. This list has made me want to make like Sage and sic a killer robot on somebody.
+
+}
+
+// Okay why has everyone reserved slots for their OCs and not released a single thing? I am dissapointed in you all.
+
+// YOU KNOW WHAT TIME IT IS. *flexes muscles while staring down the X Parasite taking the form of a big drip in the corner*

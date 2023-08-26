@@ -5,7 +5,7 @@
 	"rank-d":  { "File": "Ranks.png", "Rect": "96,0,32,128", "Center": "16,16" },
 	"rank-e":  { "File": "Ranks.png", "Rect": "128,0,32,160", "Center": "16,16" },
 	"rank-s":  { "File": "SRANK.png", "Rect": "0,0,32,32", "Center": "16,16" },
-	"rank-p":  { "File": "Funny_PRANK.png", "Rect": "0,0,32,32", "Center": "16,16" }, // I have not played Pizza Tower and probably never will
+	"rank-p":  { "File": "Funny_PRANK.png", "Rect": "0,0,32,32", "Center": "16,16" }, // I have not played Pizza Tower and probably never will (unless I clear my backlog and it's on sale; then I might)
 
     // SA2 sprite set
 	"SA2rank-a":  { "File": "SA2Ranks.png", "Rect": "0,0,32,32", "Center": "16,16" },

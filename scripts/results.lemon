@@ -9,13 +9,13 @@
 global bool scr.isOnDEZ2ResultsScreen = 0
 
 // Enable this if you are testing out the P rank, set it to 0 before commiting!
-#define PRANKTEST = 1
+#define PRANKTEST = 0
 
 function u64 getRankSprite()
 {
 	u8 rank = scr.getStageRank() // Running this just once and saving it as a u8 to reduce CPU usage. I think.
 
-    if (rankSprites) // Player has chosen SA2 sprites
+    if (scr.option.rankSprites) // Player has chosen SA2 sprites
 	{
     	if rank == 6
     		return "SA2rank-s"
@@ -150,9 +150,11 @@ function void LevelResults.UpdateBonusCounting()
 		
 		// Done
 
+		bool gotHighScore
+
 		scr.saveHighScore(global.zone_act.apparent, global.characters, 0)
 		if scr.getStageRank() > scr.getBestRank(global.zone_act, global.characters)
-			Audio.playAudio("newrecord") // Da da da da daaaaa!
+			gotHighScore = true
 			scr.saveRankData(global.zone_act.apparent, global.characters, scr.getStageRank(), 0) // Records your best rank.
 
 		Renderer.drawSprite(getRankSprite(), 175, 35, 100, 0x40, 0xe000)
@@ -168,6 +170,9 @@ function void LevelResults.UpdateBonusCounting()
 			}
 			else
 				Audio.playAudio(0xb0)
+
+			if (gotHighScore)
+				Audio.playAudio("newrecord") // Da da da da daaaaa!
 			scr.shutmeup = 1
 		}
 

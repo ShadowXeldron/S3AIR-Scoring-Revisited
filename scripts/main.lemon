@@ -36,8 +36,8 @@ global bool scr.shutmeup = 0 // Used soley to pevent a sound effect from going c
 global bool scr.isUsingCheats = 0 // This will be set to 1 if you use a "cheating" mod and will place an astersik by your ranking as well as prevent you fron getting S or P ranks
 
 // Config variables
-global u8 temp.rankIcon // Remove when an actual score system is added
-global u8 rankSprites // Toggle between custom sprites and ones based on SA2
+global u8 scr.option.debugRankForcing // Remove when an actual score system is added
+global u8 scr.option.rankSprites // Toggle between custom sprites and ones based on SA2
 
 function void addScore(u32 value)
 {

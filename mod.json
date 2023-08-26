@@ -32,7 +32,7 @@
 			{
 				"InternalName": "TEMPORARY_WILL_BE_REMOVED_Ringfinite",
 				"DisplayName": "Ringfinite enabled",
-				"Category": "REMOVE WHEN CUSTOM SCORING SYSTEM ADDED",
+				"Category": "REMOVE WHEN THE SECRETS HAVE BEEN ADDED",
 				"Variable": "scr.ringfinite",
 				"DefaultValue": "0",
 				"Options":
@@ -45,7 +45,7 @@
 			{
 				"InternalName": "TEMPORARY_WILL_BE_REMOVED_SuperForm",
 				"DisplayName": "[BIG SPOILER] The Secret",
-				"Category": "REMOVE WHEN CUSTOM SCORING SYSTEM ADDED",
+				"Category": "REMOVE WHEN THE SECRETS HAVE BEEN ADDED",
 				"Variable": "scr.customSuperForm",
 				"DefaultValue": "0",
 				"Options":
@@ -60,7 +60,7 @@
 				"InternalName": "RankingSprites",
 				"DisplayName": "Rank Sprites",
 				"Category": "Appearance",
-				"Variable": "scr.rankSprites",
+				"Variable": "scr.option.rankSprites",
 				"DefaultValue": "0",
 				"Options":
 				{
