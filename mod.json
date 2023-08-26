@@ -28,6 +28,33 @@
 					"4": "E"
 				}
 			},
+
+			{
+				"InternalName": "TEMPORARY_WILL_BE_REMOVED_Ringfinite",
+				"DisplayName": "Ringfinite enabled",
+				"Category": "REMOVE WHEN CUSTOM SCORING SYSTEM ADDED",
+				"Variable": "scr.ringfinite",
+				"DefaultValue": "0",
+				"Options":
+				{
+					"0": "No",
+					"1": "Yes"
+				}
+			},
+
+			{
+				"InternalName": "TEMPORARY_WILL_BE_REMOVED_SuperForm",
+				"DisplayName": "[BIG SPOILER] The Secret",
+				"Category": "REMOVE WHEN CUSTOM SCORING SYSTEM ADDED",
+				"Variable": "scr.customSuperForm",
+				"DefaultValue": "0",
+				"Options":
+				{
+					"0": "Disabled",
+					"1": "High Hyper Sonic",
+					"2": "Phantom Sonic"
+				}
+			},
 		]
 	}
 }

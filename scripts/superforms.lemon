@@ -1,0 +1,42 @@
+// MAJOR SPOILERS! THOU HATH BEEN WARNED! Granted, if you saw the filename you already know what the secret is.
+
+global u8 scr.customSuperForm // Custom super form value
+global bool scr.ringfinite // Infinite rings mode. I can already see people saying this is a pointless unlockable
+
+function void Character.UpdateRingsInSuperForm()
+{
+    if scr.ringfinite == true
+        return
+    else
+        if (hud.dirty.timer && scr.customSuperForm == 2 && super.active)
+        {
+            // Countdown the frames until next ring gets consumed
+            --super.ring_dec.frames
+            if (super.ring_dec.frames >= 0)
+                return
+
+            else
+                super.ring_dec.frames = 60
+
+            if (scr.levelScore != 0)
+            {
+                scr.levelScore -= 10 // Phantom Sonic consumes points instead of rings
+                if (scr.levelScore != 0)
+                    return
+            }
+
+            else
+            {
+                Character.cancelSuperTransformation()
+
+                if (global.zone != 0x0c)	// No music change in DDZ
+                {
+                    chooseFittingMusic()
+                }
+            }
+
+        }
+
+
+        base.Character.UpdateRingsInSuperForm()
+}

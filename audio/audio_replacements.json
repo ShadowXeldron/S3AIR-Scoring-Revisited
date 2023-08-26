@@ -1,4 +1,5 @@
 {
+	// Results Themes
 	"results-s":      { "File": "ResultsA.ogg", "Type": "Music", "LoopStart": "100352", "Name": "Sonic Frontiers - Cyberspace Results (S Rank)" },
 	"results-a":      { "File": "ResultsA.ogg", "Type": "Music", "LoopStart": "100352", "Name": "Sonic Frontiers - Cyberspace Results (S Rank)" },
 	"results-b":      { "File": "Results.ogg", "Type": "Music", "LoopStart": "86016", "Name": "Sonic Frontiers - Cyberspace Results" },
@@ -7,7 +8,17 @@
 	"results-e":      { "File": "ResultsE.ogg", "Type": "Music", "LoopStart": "602112", "Name": "You can guess" },
 	"results-p":      { "File": "ResultsA.ogg", "Type": "Music", "LoopStart": "100352", "Name": "Sonic Frontiers - Cyberspace Results (S Rank)" },
 	//"results-p":      { "File": "Pointless.ogg", "Type": "Music", "LoopStart": "0", "Name": "BBC Pointless Theme Tune" },
+
+	// Super Themes
+	"secret-a":      { "File": "HighHyperSonic.ogg", "Type": "Music", "LoopStart": "144563", "Name": "Sonic Symphony - Live & Learn" }, // This was ripped from an SRB2 mod and 64kbps doesn't do it justice. Maybe I shoud make my own loop before release?
+	"secret-p":      { "File": "PhantomSonic.ogg", "Type": "Music", "LoopStart": "4777", "Name": "Columns III - Scene of Carnage" }, // This is sped up by 6.25%
 	
+	// Jungles [sic]
+
+	"wonbg":      { "File": "UnlockedBG.ogg", "Type": "Jingle", "Name": "Tempo (32X) - Won a Prize" }, // You know what time it is.
+	"wonsf":      { "File": "UnlockedSecret.ogg", "Type": "Music", "Name": "Tempo (32X) - Won a Prize (2)" }, // YO HOMIES. PEEP THIS!
+	// Don't play 32X games they'll melt your brain (except Tempo that one's good)
+
 	// Sound effects
 	"tada":      { "File": "FlawlessVictory.ogg", "Type": "Sound" }, // Windows 3.1 Tada
 	"newrecord": { "File": "NewRecord.ogg", "Type": "Sound" } // Mario 64 Star Catch Fanfare

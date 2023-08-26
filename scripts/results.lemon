@@ -8,8 +8,8 @@
 
 global bool scr.isOnDEZ2ResultsScreen = 0
 
-// Enable this if you are testing out the P rank
-#define PRANKTEST = 0
+// Enable this if you are testing out the P rank, set it to 0 before commiting!
+#define PRANKTEST = 1
 
 function u64 getRankSprite()
 {
@@ -141,14 +141,14 @@ function void LevelResults.UpdateBonusCounting()
 		if scr.shutmeup == 0
 		{
 			if scr.getStageRank() == 6 // S Rank
-				playSound(MUSIC_CHAOSEMERALD)
+				Audio.playAudio(MUSIC_CHAOSEMERALD)
 			else if scr.getStageRank() == 7 // P Rank
 			{
 				Audio.playAudio("tada")
 				scr.savePRank(global.zone_act.apparent, global.characters, false)
 			}
 			else
-				playSound(0xb0)
+				Audio.playAudio(0xb0)
 			scr.shutmeup = 1
 		}
 

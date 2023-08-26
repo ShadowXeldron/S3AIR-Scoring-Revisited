@@ -22,6 +22,7 @@ include hud // HUD edits
 include scoretables // Arrays containing all the stuff
 include persistentdata
 include scoremenu
+include superforms // By being a nosy person you just spoiled yourself on the secret. Naughty noo noo!
 include obligatoryaudiostuff // Absolutely mandatory for any mod I make
 #if ACHIEVEMENTS_PLUS_ACTIVE
 include achievements  // If Achievements Plus is installed, gain access to achievements designed to use it
