@@ -28,6 +28,18 @@
 					"4": "E"
 				}
 			},
+			{
+				"InternalName": "RankingSprites",
+				"DisplayName": "Rank Sprites",
+				"Category": "Appearance",
+				"Variable": "rankSprites",
+				"DefaultValue": "0",
+				"Options":
+				{
+					"0": "Custom",
+					"1": "SA2",
+				}
+			},
 		]
 	}
 }

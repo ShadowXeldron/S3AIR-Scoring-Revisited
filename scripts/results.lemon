@@ -15,21 +15,40 @@ function u64 getRankSprite()
 {
 	u8 rank = scr.getStageRank() // Running this just once and saving it as a u8 to reduce CPU usage. I think.
 
-	if rank == 6
-		return "rank-s"
-	else if rank == 5
-		return "rank-a"
-	else if rank == 4
-		return "rank-b"
-	else if rank == 3
-		return "rank-c"
-	else if rank == 2
-		return "rank-d"
-	else if rank == 1
-		return "rank-e"
-	else if rank == 7
-		return "rank-p"
-	
+    if (rankSprites) // Player has chosen SA2 sprites
+	{
+    	if rank == 6
+    		return "SA2rank-s"
+    	else if rank == 5
+    		return "SA2rank-a"
+    	else if rank == 4
+    		return "SA2rank-b"
+    	else if rank == 3
+    		return "SA2rank-c"
+    	else if rank == 2
+    		return "SA2rank-d"
+    	else if rank == 1
+    		return "SA2rank-e"
+    	else if rank == 7
+    		return "SA2rank-p"
+	}
+	else // Use the default, custom sprites
+	{
+    	if rank == 6
+    		return "rank-s"
+    	else if rank == 5
+    		return "rank-a"
+    	else if rank == 4
+    		return "rank-b"
+    	else if rank == 3
+    		return "rank-c"
+    	else if rank == 2
+    		return "rank-d"
+    	else if rank == 1
+    		return "rank-e"
+    	else if rank == 7
+    		return "rank-p"
+	}
 }
 
 function u64 getResultsMusic()

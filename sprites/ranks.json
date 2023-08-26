@@ -6,4 +6,13 @@
 	"rank-e":  { "File": "Ranks.png", "Rect": "128,0,32,160", "Center": "16,16" },
 	"rank-s":  { "File": "SRANK.png", "Rect": "0,0,32,32", "Center": "16,16" },
 	"rank-p":  { "File": "Funny_PRANK.png", "Rect": "0,0,32,32", "Center": "16,16" }, // I have not played Pizza Tower and probably never will
+
+    // SA2 sprite set
+	"SA2rank-a":  { "File": "SA2Ranks.png", "Rect": "0,0,32,32", "Center": "16,16" },
+	"SA2rank-b":  { "File": "SA2Ranks.png", "Rect": "32,0,32,64", "Center": "16,16" },
+	"SA2rank-c":  { "File": "SA2Ranks.png", "Rect": "64,0,32,96", "Center": "16,16" },
+	"SA2rank-d":  { "File": "SA2Ranks.png", "Rect": "96,0,32,128", "Center": "16,16" },
+	"SA2rank-e":  { "File": "SA2Ranks.png", "Rect": "128,0,32,160", "Center": "16,16" },
+	"SA2rank-s":  { "File": "SA2Ranks.png", "Rect": "160,0,32,32", "Center": "16,16" },
+	"SA2rank-p":  { "File": "SA2Ranks.png", "Rect": "192,0,32,32", "Center": "16,16" },
 }
