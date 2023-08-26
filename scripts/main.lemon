@@ -37,6 +37,7 @@ global bool scr.isUsingCheats = 0 // This will be set to 1 if you use a "cheatin
 
 // Config variables
 global u8 temp.rankIcon // Remove when an actual score system is added
+global u8 rankSprites // Toggle between custom sprites and ones based on SA2
 
 function void addScore(u32 value)
 {
