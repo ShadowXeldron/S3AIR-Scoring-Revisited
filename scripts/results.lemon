@@ -254,7 +254,7 @@ function bool DEZFinalBoss3.canPlayerEnterDoomsday()
 function void fn02dae6()
 {
 	playMusic(MUSIC_CTRL_FADEOUT)
-	Renderer.drawText("oxyfont_regular", 100, 100, "YOU'RE WINNER!", 0xffffffff, 1, 0, 0xe000, 0)
+	//Renderer.drawText("oxyfont_regular", 100, 100, "YOU'RE WINNER!", 0xffffffff, 1, 0, 0xe000, 0)
 
 	
 	Kosinski.addToDMAQueue(0x0d6a62, 0xa400)		// Common results graphics

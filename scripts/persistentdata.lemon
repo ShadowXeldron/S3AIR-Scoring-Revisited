@@ -42,7 +42,7 @@ function bool scr.hasPRank(u16 act, u8 char) // Returns whether or not you're a 
    return System.loadPersistentData(0x2E9999, stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), 1)
 }
 
-function bool scr.hasPRankString(u16 actID, u8 char) // P Rank checker, but it's not a numberjacl
+function bool scr.hasPRankString(string actID, u8 char) // P Rank checker, but it's not a numberjacl
 {
    string charID = scr.getCharID(char)
    return System.loadPersistentData(0x2E9999, stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), 1)

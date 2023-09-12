@@ -1,3 +1,5 @@
 {
+	"scoremenu-bg":  { "File": "spritebg.png" }, // There are a lot of transparent pixels at the side of this sprite. Why? Because I'm a lazy git.
+
 	"background-a":  { "File": "background-phantom.png" }
 }

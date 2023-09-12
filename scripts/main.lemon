@@ -22,8 +22,9 @@ include hud // HUD edits
 include scoretables // Arrays containing all the stuff
 include persistentdata
 include scoremenu
-include superforms // By being a nosy person you just spoiled yourself on the secret. Naughty noo noo!
+include superforms // By being a nosy person you just spoiled yourself on the secret.
 include obligatoryaudiostuff // Absolutely mandatory for any mod I make
+include esnames // A huge pile of names for extra slot mods based on the ES repository
 #if ACHIEVEMENTS_PLUS_ACTIVE
 include achievements  // If Achievements Plus is installed, gain access to achievements designed to use it
 #endif

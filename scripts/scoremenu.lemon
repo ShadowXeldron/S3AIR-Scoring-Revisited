@@ -33,19 +33,20 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
 {
     scr.scoreMenuIsActive = 1
 
-    u8 currentchar = 0
+    string currentchar = 0
+    Renderer.drawSprite("scoremenu-bg", 0, 0, 0, 0, 0xf000)
 
-    while true
+    bool esmode = 0
+
+    while scr.scoreMenuIsActive == 1
     {
 
-
-
         // Draw backgrounds
-        //Renderer.drawSprite("bg_dataselect", 100, 100, 0, 0x10, 0xe000)
 
+        //Renderer.drawSprite(getRankSprite(), 175, 35, 100, 0x40, 0xe000)
 
         // Write all of the text
-        Renderer.drawText("oxyfont_regular", 10, 10, stringformat("%d's SCORECARD", currentchar), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_regular", 10, 10, stringformat("%s's Scorecard", scr.getCharName(currentchar, esmode)), 0x0f0f0fff, 1, 0, 0xe000, 0)
 
         // I need a more effective way of doing this. Right now, we have the functions from hell. I did try a for loop, but it was glitchy.
         /*
@@ -103,7 +104,13 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
 
         if (Input.buttonPressed(BUTTON_LEFT))
             if currentchar == 0
-                currentchar = 4
+                if true //Placeholder functionality, replace with Mods.isModActive("Extra Character Slots") eventually
+                {
+                    esmode = 1
+                    currentchar = 0
+                }
+                else
+                    currentchar = 4
             else
                 currentchar -= 1
             
@@ -117,7 +124,8 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
         
 
         if (Input.buttonPressed(BUTTON_B))
-            break
+            scr.scoreMenuIsActive = 0
+            //break
         
         waitForNextFrame() // The game dies of heart failure if you don't include this
     }
@@ -156,6 +164,7 @@ function void DataSelect.drawCustomPlanes()
 		Renderer.setupPlane(0, 0, 0x400 - px, getScreenHeight(), 0x10, 0, 0x3000)
 	}
 }
+
 
 function u64 scr.getDataSelectBackground()
 {
