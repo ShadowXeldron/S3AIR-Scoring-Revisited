@@ -93,17 +93,20 @@ function void SonicPressedJumpInMidAir()
 
 function void KnucklesPressedJumpInMidAir()
 {
+
     if ((super.active == 0xff && scr.customSuperForm != 1) || super.active != 0xff)
         base.KnucklesPressedJumpInMidAir()
 
     else
     {
+        playSound(0x59)
+
         // Start defying all that is holy
         char.flags &= ~(char.flag.ROLLING | char.flag.CONTROL_LOCK)
         char.hitbox_extends.y = 10
         char.hitbox_extends.x = 10
         char.double_jump_state = 1
-        char.velocity.y += 0x200
+        char.velocity.y += 0
         if (char.velocity.y < 0)
             char.velocity.y = 0
 
