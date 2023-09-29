@@ -91,6 +91,40 @@ function void SonicPressedJumpInMidAir()
 	}
 }
 
+function void KnucklesPressedJumpInMidAir()
+{
+    if ((super.active == 0xff && scr.customSuperForm != 1) || super.active != 0xff)
+        base.KnucklesPressedJumpInMidAir()
+
+    else
+    {
+        // Start defying all that is holy
+        char.flags &= ~(char.flag.ROLLING | char.flag.CONTROL_LOCK)
+        char.hitbox_extends.y = 10
+        char.hitbox_extends.x = 10
+        char.double_jump_state = 1
+        char.velocity.y += 0x200
+        if (char.velocity.y < 0)
+            char.velocity.y = 0
+
+        char.groundspeed = 0xfff
+        if (char.flags & char.flag.FACING_LEFT)
+        {
+            char.velocity.x = -char.groundspeed
+            knuckles.glide_direction = -0x80
+        }
+        else
+        {
+            char.velocity.x = char.groundspeed
+            knuckles.glide_direction = 0
+        }
+        char.rotation.both = 0
+        knuckles.glideclimbstate = 0x02
+
+        fn016fa8()
+    }
+}
+
 /*
 //# translated(0x011bde) end(0x011cf0)
 //# translated(0x011d16) end(0x011da4)
