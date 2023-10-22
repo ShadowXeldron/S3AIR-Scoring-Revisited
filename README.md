@@ -7,7 +7,6 @@ Work-in-progress Sonic 3 AIR mod that adds a ranking system to the game.
 
 ### Known Issues
 
- - The DEZ2 results screen just doesn't work properly. Fixing it will require rewriting the results screen to not use the DMA queue.
  - S Ranks appear as A ranks on the score menu (not sure why)
  - I have sort of added a background image to the score select, but it does not work correctly. The score menu may need to be completely rewritten for it to work properly.
  - Achievements Plus support is only partially implemented as the custom achievements do not have triggers.

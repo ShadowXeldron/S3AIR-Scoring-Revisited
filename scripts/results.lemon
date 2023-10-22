@@ -7,6 +7,7 @@
 */
 
 global bool scr.isOnDEZ2ResultsScreen = 0
+global bool scr.endgame = 0
 
 // Enable this if you are testing out the P rank, set it to 0 before commiting!
 #define PRANKTEST = 0
@@ -87,8 +88,8 @@ function void LevelResults.UpdateBonusCounting()
 			return
 
 		// Reset char.drown_countdown for both characters
-		u8[0xffffb000 + 0x2c] = 30
-		u8[0xffffb04a + 0x2c] = 30
+		u8[0xffffb000 + 0x2c] = 255
+		u8[0xffffb04a + 0x2c] = 255
 
 		playMusic(MUSIC_LEVELCLEAR)
 
@@ -196,7 +197,7 @@ function void LevelResults.UpdateBonusCounting()
 			
 			if global.zone_act.apparent == 0x1700
 			{
-				scr.isOnDEZ2ResultsScreen = 0 // Okay so maybe this boolean is a bit of a mouthful
+				scr.endgame = 1
 				objA0.update_address = 0x0803d6
 			}
 			else
@@ -235,11 +236,19 @@ function void fn0803d6() // This is included for the DEZ2 results screen
 //# address-hook(0x080382) end(0x0803d4)
 function void fn080382() // DEZ2 results screen
 {
-	scr.isOnDEZ2ResultsScreen = 1
-
-	if (allocDynamicObjectStd())
+	if scr.isOnDEZ2ResultsScreen == 0
 	{
-		objA1.update_address = 0x02dad0
+		if (allocDynamicObjectStd())
+		{
+			scr.isOnDEZ2ResultsScreen = 1
+			objA1.update_address = 0x02dad0
+		}
+	}
+
+	else if scr.endgame == 1
+	{
+		//scr.isOnDEZ2ResultsScreen = 0
+		base.fn080382()
 	}
 }
 
