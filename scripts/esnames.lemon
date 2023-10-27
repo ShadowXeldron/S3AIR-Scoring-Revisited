@@ -127,7 +127,7 @@ constant array<string> SCR_ESNAMES = // Let's be real I haven't heard of most of
     "C.H.C Jester", // 99
     "Ashuro", // 100, not to be confusted with Ashura. This guy's apparently a badger.
     "", // 101
-    "", // 102
+    "Feels", // 102, https://gamebanana.com/wips/79826
     "", // 103
     "", // 104
     "", // 105; this is marked as a template and will be ignored
