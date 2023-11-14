@@ -12,64 +12,26 @@ global bool scr.endgame = 0
 // Enable this if you are testing out the P rank, set it to 0 before commiting!
 #define PRANKTEST = 0
 
-function u64 getRankSprite()
+constant array <u64> RankKeys = 
+{
+	"e", "d", "c", "b", "a", "s", "p"
+}
+
+function u64 getRankSprite() //pascal case is subjectively better then camel case.
 {
 	u8 rank = scr.getStageRank() // Running this just once and saving it as a u8 to reduce CPU usage. I think.
-
-    if (scr.option.rankSprites) // Player has chosen SA2 sprites
-	{
-    	if rank == 6
-    		return "SA2rank-s"
-    	else if rank == 5
-    		return "SA2rank-a"
-    	else if rank == 4
-    		return "SA2rank-b"
-    	else if rank == 3
-    		return "SA2rank-c"
-    	else if rank == 2
-    		return "SA2rank-d"
-    	else if rank == 1
-    		return "SA2rank-e"
-    	else if rank == 7
-    		return "SA2rank-p"
-	}
-	else // Use the default, custom sprites
-	{
-    	if rank == 6
-    		return "rank-s"
-    	else if rank == 5
-    		return "rank-a"
-    	else if rank == 4
-    		return "rank-b"
-    	else if rank == 3
-    		return "rank-c"
-    	else if rank == 2
-    		return "rank-d"
-    	else if rank == 1
-    		return "rank-e"
-    	else if rank == 7
-    		return "rank-p"
-	}
+	
+	u64 Prefix = scr.option.rankSprites ? "SA2rank" : "rank"
+	
+	return stringformat("%s-%s", Prefix, RankKeys[rank - 1])
+	
 }
 
 function u64 getResultsMusic()
 {
 	u8 rank = scr.getStageRank()
-
-	if rank == 6
-		return "results-s"
-	else if rank == 5
-		return "results-a"
-	else if rank == 4
-		return "results-b"
-	else if rank == 3
-		return "results-c"
-	else if rank == 2
-		return "results-d"
-	else if rank == 1
-		return "results-e"
-	else if rank == 7
-		return "results-p"
+	return stringformat("results-%s",RankKeys[rank - 1])
+	
 }
 
 //-------------------------------------------------------//
