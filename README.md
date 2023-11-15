@@ -12,7 +12,7 @@ Work-in-progress Sonic 3 AIR mod that adds a ranking system to the game.
  - Achievements Plus support is only partially implemented as the custom achievements do not have triggers.
 
 ### Credits
-[montydoesgames](https://github.com/montydoesgames) - Rank sprite icons
+[montydoesgames](https://github.com/montydoesgames) - Rank sprite icons  
 [vmackg](https://github.com/vmackg) - Code quality improvements, score menu fixes
 
 Contributions are welcome! Please open a pull request with your fixes.
