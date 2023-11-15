@@ -13,13 +13,13 @@ function u8 scr.getBestRank(u16 act, u8 char)
 {
    string actID = scr.getActID(act)
    string charID = scr.getCharID(char)
-   return System.loadPersistentData(0x2EBCDA, stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), 5) // I honestly can't actually think of a better way to implement this 
+   return System.loadPersistentData(0x2EBCDA, stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), 6) // I honestly can't actually think of a better way to implement this 
 }
 
 function u8 scr.getBestRankString(string actID, u8 char)
 {
    string charID = scr.getCharID(char)
-   return System.loadPersistentData(0x2EBCDA, stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), 5) // I honestly can't actually think of a better way to implement this 
+   return System.loadPersistentData(0x2EBCDA, stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), 6) // I honestly can't actually think of a better way to implement this 
 }
 
 
