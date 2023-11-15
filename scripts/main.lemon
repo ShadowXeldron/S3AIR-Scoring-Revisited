@@ -40,9 +40,15 @@ global bool scr.isUsingCheats = 0 // This will be set to 1 if you use a "cheatin
 global u8 scr.option.debugRankForcing // Remove when an actual score system is added
 global u8 scr.option.rankSprites // Toggle between custom sprites and ones based on SA2
 
+
+//No parenthesis in statements.
+//oh no
+
+
+
 function void addScore(u32 value)
 {
-    if global.game_mode != 0x48	
+    if (global.game_mode != 0x48)	
         scr.levelScore += value * 10 // Adds to the level score
 
     base.addScore(value)
@@ -74,13 +80,20 @@ function void Standalone.onDeath()
 
 function void restartAtCheckpoint() // Don't go thinking you can get out of a sticky situation by restarting at a checkpoint
 {
-    if checkpoint.number == 0 // To be fair, if you haven't hit any checkpoints you're basically doing the level again from the beginning.
+    if (checkpoint.number == 0) // To be fair, if you haven't hit any checkpoints you're basically doing the level again from the beginning.
         scr.coolBonus = 1000
     else
         scr.coolBonus = 0
     scr.coolBonusBackup = scr.coolBonus
     base.restartAtCheckpoint()
 }
+
+
+
+
+//This is so terribly useless.
+//use constant arrays.
+//i made one in results.lemon
 
 function string scr.rankToLetter(u8 rank) // Gives you a rank letter. Does not include P Ranks because they are saved seperately.
 {
@@ -99,3 +112,4 @@ function string scr.rankToLetter(u8 rank) // Gives you a rank letter. Does not i
     else if rank == 6
         return "S" 
 }
+
