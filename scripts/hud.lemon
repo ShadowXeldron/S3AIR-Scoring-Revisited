@@ -35,3 +35,5 @@ function void RenderHUD()
 }
 
 // The solution was, of course, to go at all the vanilla code with a hatchet.
+
+// Note that this included HUD is temporary

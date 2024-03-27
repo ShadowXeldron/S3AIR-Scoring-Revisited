@@ -135,7 +135,7 @@ function void LevelResults.UpdateBonusCounting()
 				Audio.playAudio(0xb0)
 
 			if (gotHighScore)
-				Audio.playAudio("newrecord") // Da da da da daaaaa!
+				Audio.playAudio("newrecord") // Da da da da da daaaaa!
 			scr.shutmeup = 1
 		}
 
