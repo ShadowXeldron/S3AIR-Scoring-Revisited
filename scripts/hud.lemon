@@ -10,6 +10,48 @@
 // HUD display                                           //
 //-------------------------------------------------------//
 
+constant array <u32> RANK_COLOURS = // Hexadecimal codes for rank colours, most of these were gotten from here: https://html-color.codes/
+{
+	0xffffffff, // Fallback, white
+    0x00008bff, // E, dark blue
+    0xff8c00ff, // D, dark orange
+    0x7fff00ff, // C, chartreuse
+    0x0000cdff, // B, medium blue
+    0xff0000ff, // A, red
+    0xffd700ff, // S, gold
+    0x9400d3ff // P, dark violet
+}
+
+function u8 scr.predictFinalRank() // Used to display the predicted rank for the stage. Since it will be running many calculations constantly an option to disable it should be included for low powered devices
+{
+	// Possibly include an option in the settings to ignore P ranks?
+	
+	// Predict final score; for some reason stacking it does nothing
+	u32 predictedFinalScore = scr.levelScore + scr.getRingBonus() + scr.getTimeBonus() + scr.coolBonus
+
+	u8 rank
+
+	// The rest of this function is fundamentally identical to getStageRank
+	if predictedFinalScore <= scr.getStageRankRequirement(5)
+        rank = 7 // P
+    else if ((predictedFinalScore >= scr.getStageRankRequirement(0)) && (scr.coolBonusBackup == 1000)) // You need to beat the level without taking damage to get the S rank
+        rank = 6 // S
+    else if ((predictedFinalScore >= scr.getStageRankRequirement(1)) && (scr.coolBonusBackup != 0)) // You need to beat the level without dying or getting hit 10 times to get the A rank
+        rank = 5 // A
+    else if predictedFinalScore >= scr.getStageRankRequirement(2)
+        rank = 5 // B
+    else if predictedFinalScore >= scr.getStageRankRequirement(3)
+        rank = 3 // C
+    else if predictedFinalScore >= scr.getStageRankRequirement(4)
+        rank = 2 // D
+    else if predictedFinalScore <= scr.getStageRankRequirement(4)
+        rank = 1 // E
+    else
+        rank = 0 // No rank.
+
+	return rank
+}
+
 //# address-hook(0x00db44) end(0x00dbb2)
 function void RenderHUD()
 {
@@ -19,16 +61,18 @@ function void RenderHUD()
 		
 	// Temporary HUD because I can't draw
 	Renderer.drawText("oxyfont_small", 10, 10, stringformat("Score: %d", scr.levelScore), 0xffffffff, 1, 0, 0xe000, 0)
-	Renderer.drawText("oxyfont_small", 10, 20, stringformat("Rings: %d", ring_counter), 0xffffffff, 1, 0, 0xe000, 0)
-	Renderer.drawText("oxyfont_small", 10, 30, stringformat("Time: %d'%d''%d", timer.minutes, timer.seconds, timer.frames), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", 10, 20, stringformat("Rings: %d (Ring Bonus: %d)", ring_counter, scr.getRingBonus()), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", 10, 30, stringformat("Time: %d'%d''%d (Time Bonus: %d)", timer.minutes, timer.seconds, timer.frames, scr.getTimeBonus()), 0xffffffff, 1, 0, 0xe000, 0)
 	Renderer.drawText("oxyfont_small", 10, 40, stringformat("Lives: %d", lives_counter), 0xffffffff, 1, 0, 0xe000, 0)
-	Renderer.drawText("oxyfont_small", 10, 50, stringformat("Cool Bonus: %d", scr.coolBonus * 10), 0xffffffff, 1, 0, 0xe000, 0)
-	Renderer.drawText("oxyfont_small", 10, 60, stringformat("Total Score: %d", player.score * 10), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", 10, 50, stringformat("Cool Bonus: %d", scr.coolBonus), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", 10, 60, stringformat("Total Score: %d", player.score), 0xffffffff, 1, 0, 0xe000, 0)
 	Renderer.drawText("oxyfont_small", 10, 100, stringformat("Level ID: %04x", global.zone_act.apparent), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", 10, 110, stringformat("Predicted Score Total: %d", scr.levelScore + scr.getRingBonus() + scr.getTimeBonus() + scr.coolBonus), 0xffffffff, 1, 0, 0xe000, 0)
 
 	if (!nonScoringZone)
 	{
 		Renderer.drawText("oxyfont_small", 10, 70, stringformat("Rank: %d", scr.getStageRank()), 0xffffffff, 1, 0, 0xe000, 0)
+		Renderer.drawText("sonic3_fontC", 380, 10, stringformat("%s", RANK_KEYS[scr.predictFinalRank() - 1]), RANK_COLOURS[scr.predictFinalRank()], 1, 0, 0xe000, 0)
 		Renderer.drawText("oxyfont_small", 10, 80, stringformat("Best Rank: %d", scr.getBestRank(global.zone_act.apparent, global.characters)), 0xffffffff, 1, 0, 0xe000, 0)
 		Renderer.drawText("oxyfont_small", 10, 90, stringformat("High Score: %d", scr.getHighScore(global.zone_act.apparent, global.characters)), 0xffffffff, 1, 0, 0xe000, 0)
 	}

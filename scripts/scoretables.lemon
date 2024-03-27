@@ -67,12 +67,12 @@ function u8 scr.getStageRank() // This returns a u8 value to represent the rank
 
 constant array<u32> AIZ1 =
 {
-    30000, // S
-    22000, // A
-    16000, // B
-    11000, // C
-    9000, // D
-    1001 // P
+    3000, // S
+    2200, // A
+    1600, // B
+    1100, // C
+    900, // D
+    100 // P
 }
 
 constant array<u32> AIZ2 =

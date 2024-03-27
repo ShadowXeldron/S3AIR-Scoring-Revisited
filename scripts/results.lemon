@@ -12,7 +12,7 @@ global bool scr.endgame = 0
 // Enable this if you are testing out the P rank, set it to 0 before commiting!
 #define PRANKTEST = 0
 
-constant array <u64> RankKeys = 
+constant array <u64> RANK_KEYS = 
 {
 	"e", "d", "c", "b", "a", "s", "p"
 }
@@ -23,14 +23,14 @@ function u64 getRankSprite() //pascal case is subjectively better then camel cas
 	
 	u64 Prefix = scr.option.rankSprites ? "SA2rank" : "rank"
 	
-	return stringformat("%s-%s", Prefix, RankKeys[rank - 1])
+	return stringformat("%s-%s", Prefix, RANK_KEYS[rank - 1])
 	
 }
 
 function u64 getResultsMusic()
 {
 	u8 rank = scr.getStageRank()
-	return stringformat("results-%s",RankKeys[rank - 1])
+	return stringformat("results-%s",RANK_KEYS[rank - 1])
 	
 }
 
@@ -277,8 +277,8 @@ function void fn02dae6()
     */
 	
 	results.time_bonus = scr.getTimeBonus() // Time bonus has been spun off into a seperate function
-
 	results.ring_bonus = scr.getRingBonus()
+	
 	results.total_bonus = 0
 	objA0.countdown_value = 360
 	u16[A0 + 0x30] = 12
@@ -322,15 +322,15 @@ function u16 scr.getTimeBonus() // Just a port of the original function
 	else if (seconds < 180)
 		scoreBonus = 500
 	else if (seconds < 240)
-		results.time_bonus = 300
+		scoreBonus = 300
 	else if (seconds < 300)
-		results.time_bonus = 200
+		scoreBonus = 200
 	else if (seconds < 360)
-		results.time_bonus = 100
+		scoreBonus = 100
 	else if (seconds < 420)
-		results.time_bonus = 50
+		scoreBonus = 50
 	else
-		results.time_bonus = 0
+		scoreBonus = 0
 
     return scoreBonus
 
@@ -339,7 +339,7 @@ function u16 scr.getTimeBonus() // Just a port of the original function
 function u16 scr.getRingBonus()
 {
     // doStuff()
-    return u32(ring_counter) * 10 // Temporary
+    return ring_counter * 10 // Temporary
 }
 
 // TODO: Make it so that Big Rings reward 1000 points on the spot instead of 50 rings

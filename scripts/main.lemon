@@ -48,8 +48,8 @@ global u8 scr.option.menuBG // Currently set menu background
 
 function void addScore(u32 value)
 {
-    if (global.game_mode != 0x48)	
-        scr.levelScore += value * 10 // Adds to the level score
+    if (global.game_mode != 0x48)
+        scr.levelScore += value // Adds to the level score
 
     base.addScore(value)
     // Call the base function once its over
