@@ -1,5 +1,5 @@
 /*
-	This script file is part of the Sonic 3 A.I.R. script software distribution.
+	This script file is derived of the Sonic 3 A.I.R. script software distribution.
 	Copyright (C) 2017-2022 by Eukaryot
 
 	Published under the GNU GPLv3 open source software license, see license.txt
@@ -52,6 +52,7 @@ function void LevelResults.UpdateBonusCounting()
 		// Reset char.drown_countdown for both characters
 		u8[0xffffb000 + 0x2c] = 255
 		u8[0xffffb04a + 0x2c] = 255
+        // TODO: Disable drowning entirely whilst on the results screen
 
 		playMusic(MUSIC_LEVELCLEAR)
 
@@ -122,10 +123,17 @@ function void LevelResults.UpdateBonusCounting()
 
 		Renderer.drawSprite(getRankSprite(), 175, 35, 100, 0x40, 0xe000)
 
+        if (gotHighScore)
+            Renderer.drawText("sonic3_fontC", 200, 100, "A brand new record!", 0xffffffff, 1, 0, 0xe000, 0)
+    
+
 		if (scr.shutmeup == 0)
 		{
 			if (scr.getStageRank() == 6) // S Rank
+            {
 				Audio.playAudio(MUSIC_CHAOSEMERALD)
+                Game.setSecretUnlocked(0x12) // Getting an S rank will also unlock the game speed option because the Sonic 3 unlock code is nigh-impossible without a wired controller and a CRT or cheating via emulator slowdown
+            }
 			else if (scr.getStageRank() == 7) // P Rank
 			{
 				Audio.playAudio("tada")
@@ -136,6 +144,7 @@ function void LevelResults.UpdateBonusCounting()
 
 			if (gotHighScore)
 				Audio.playAudio("newrecord") // Da da da da daaaaa!
+
 			scr.shutmeup = 1
 		}
 
@@ -162,6 +171,7 @@ function void LevelResults.UpdateBonusCounting()
 				scr.endgame = 1
 				objA0.update_address = 0x0803d6
 			}
+
 			else
 			{
 				LevelResults.AdvanceToNextAct()
@@ -226,7 +236,7 @@ function void fn02dae6()
 	playMusic(MUSIC_CTRL_FADEOUT)
 	//Renderer.drawText("oxyfont_regular", 100, 100, "YOU'RE WINNER!", 0xffffffff, 1, 0, 0xe000, 0)
 
-	
+	/*
 	Kosinski.addToDMAQueue(0x0d6a62, 0xa400)		// Common results graphics
 	if (global.zone_act != 0x1600 && global.act.apparent == 0)
 	{
@@ -259,56 +269,17 @@ function void fn02dae6()
 		// Knuckles
 		A1 = 0x0d67f0
 	}
+
+
 	D2.u16 = (u16[A0 + 0x2c] != 0) ? 0xb400 : 0xaf00
 	Kosinski.addToDMAQueue(A1, D2.u16)		// Character nameplate
 	
 	hud.dirty.timer = 0
+    */
 	
-	u32 seconds = timer.seconds + u32(timer.minutes) * 60
-	if (seconds == 599)
-	{
-		// Special time bonus for 9:59
-		results.time_bonus = 10000
-	}
-	
-	else
-	{
-		// Time bonus		  Original	   S3AIR
-		//  - 0:00 .. 0:59	-> 50.000	-> 50.000
-		//  - 1:00 .. 1:29	-> 10.000	-> 10.000
-		//  - 1:30 .. 1:59	->  5.000	-> 10.000
-		//  - 2:00 .. 2:29	->  4.000	->  5.000
-		//  - 2:30 .. 2:59	->  3.000	->  5.000
-		//  - 3:00 .. 3:29	->  1.000	->  3.000
-		//  - 3:30 .. 3:59	->    100	->  3.000
-		//  - 4:00 .. 4:59	->    100	->  2.000
-		//  - 5:00 .. 5:59	->    100	->  1.000
-		//  - 6:00 .. 6:59	->    100	->    500
-		//  - 7:00 .. 9:58	->    100	->      0
-	#if STANDALONE
-		if (seconds < 60)
-			results.time_bonus = 5000
-		else if (seconds < 120)
-			results.time_bonus = 1000
-		else if (seconds < 180)
-			results.time_bonus = 500
-		else if (seconds < 240)
-			results.time_bonus = 300
-		else if (seconds < 300)
-			results.time_bonus = 200
-		else if (seconds < 360)
-			results.time_bonus = 100
-		else if (seconds < 420)
-			results.time_bonus = 50
-		else
-			results.time_bonus = 0
-	#else
-		u16 offset = min(seconds / 30, 7)
-		results.time_bonus = u16[0x02deaa + offset * 2]
-	#endif
-	}
+	results.time_bonus = scr.getTimeBonus() // Time bonus has been spun off into a seperate function
 
-	results.ring_bonus = u32(ring_counter) * 10
+	results.ring_bonus = scr.getRingBonus()
 	results.total_bonus = 0
 	objA0.countdown_value = 360
 	u16[A0 + 0x30] = 12
@@ -322,3 +293,73 @@ function void LevelResults.UpdateStaticTextDisplay()
 		return
 	DrawObject()
 }
+
+function u16 scr.getTimeBonus() // Just a port of the original function
+{
+    u16 scoreBonus
+
+    u32 seconds = timer.seconds + u32(timer.minutes) * 60
+		
+    // Time bonus		  Original	   S3AIR
+    //  - 0:00 .. 0:59	-> 50.000	-> 50.000
+    //  - 1:00 .. 1:29	-> 10.000	-> 10.000
+	//  - 1:30 .. 1:59	->  5.000	-> 10.000
+	//  - 2:00 .. 2:29	->  4.000	->  5.000
+	//  - 2:30 .. 2:59	->  3.000	->  5.000
+    //  - 3:00 .. 3:29	->  1.000	->  3.000
+	//  - 3:30 .. 3:59	->    100	->  3.000
+	//  - 4:00 .. 4:59	->    100	->  2.000
+	//  - 5:00 .. 5:59	->    100	->  1.000
+	//  - 6:00 .. 6:59	->    100	->    500
+	//  - 7:00 .. 9:58	->    100	->      0
+    // The 9:59 bonus has been removed to prevent cheesing the higher ranks
+
+    // No need for if standalone because this mod is exclusively tested on and designed around S3AIR proper
+
+    if (seconds < 60)
+		scoreBonus = 5000
+    else if (seconds < 120)
+		scoreBonus = 1000
+	else if (seconds < 180)
+		scoreBonus = 500
+	else if (seconds < 240)
+		results.time_bonus = 300
+	else if (seconds < 300)
+		results.time_bonus = 200
+	else if (seconds < 360)
+		results.time_bonus = 100
+	else if (seconds < 420)
+		results.time_bonus = 50
+	else
+		results.time_bonus = 0
+
+    return scoreBonus
+
+}
+
+function u16 scr.getRingBonus()
+{
+    // doStuff()
+    return u32(ring_counter) * 10 // Temporary
+}
+
+// TODO: Make it so that Big Rings reward 1000 points on the spot instead of 50 rings
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
