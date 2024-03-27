@@ -1,9 +1,8 @@
-
-
-// Data select and score stuff for my rankings mod which I really need a real name for
+// // Data select and score stuff for my rankings mod which I really need a real name for
 
 global bool scr.scoreMenuIsActive = 0
 
+/*
 //# address-hook(0x01ad20) end(0x01af68)
 function void DrawObject()
 {
@@ -12,7 +11,7 @@ function void DrawObject()
     else
         base.DrawObject()
 }
-
+*/
 //# address-hook(0x00d7c0) end(0x00d7e6)
 function void fn00d7c0() // fn00d96a and fn00d7c0 were here
 {
@@ -35,7 +34,10 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
 {
     scr.scoreMenuIsActive = 1
 
-	Renderer.drawSprite("scoremenu-bg", 0, 0, 0, 0, 0xf000)
+	//Renderer.drawSprite("scoremenu-bg", 0, 0, 0, 0, 0xfffd)
+
+    SpriteHandle scoremenu_bg = Renderer.addSpriteHandle("scoremenu-bg", 0, 0, 0xfffd)
+    scoremenu_bg.setPriorityFlag(true)
 	
     string currentchar = 0
 
@@ -46,10 +48,8 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
 
         // Draw backgrounds
 
-        //Renderer.drawSprite(getRankSprite(), 175, 35, 100, 0x40, 0xe000)
-
         // Write all of the text
-        Renderer.drawText("oxyfont_regular", 10, 10, stringformat("%s's Scorecard", scr.getCharName(currentchar, esmode)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+        Renderer.drawText("oxyfont_regular", 10, 10, stringformat("%s's Scorecard", scr.getCharName(currentchar, esmode)), 0x0f0f0fff, 1, 0, 0xfffe, 0)
 
         // I need a more effective way of doing this. Right now, we have the functions from hell. I did try a for loop, but it was glitchy.
         /*
@@ -128,9 +128,10 @@ function void DrawText(u8 i, string currentchar)
 	string anothervar = stringformat("%s1", ForcedNamesShort[i])
 	string anothervar1 = stringformat("%s2", ForcedNamesShort[i])
 	
-	Renderer.drawText("oxyfont_small", var, 25 + 40 * varI, ForcedZoneNames[i], 0x0f0f0fff, 1, 0, 0xe000, 0)
-	Renderer.drawText("oxyfont_tiny", var, 35 + 40 * varI, stringformat("Act 1: %d %s %s", scr.getHighScoreString(anothervar, currentchar), scr.rankToLetter(scr.getBestRankString(anothervar, currentchar)), scr.isPLetter(anothervar, currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
-	Renderer.drawText("oxyfont_tiny", var, 45 + 40 * varI, stringformat("Act 2: %d %s %s", scr.getHighScoreString(anothervar1, currentchar), scr.rankToLetter(scr.getBestRankString(anothervar1, currentchar)), scr.isPLetter(anothervar1, currentchar)), 0x0f0f0fff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_small", var, 25 + 40 * varI, ForcedZoneNames[i], 0x0f0f0fff, 1, 0, 0xfffe, 0) // Was 0xe000
+	Renderer.drawText("oxyfont_tiny", var, 35 + 40 * varI, stringformat("Act 1: %d %s %s", scr.getHighScoreString(anothervar, currentchar), scr.rankToLetter(scr.getBestRankString(anothervar, currentchar)), scr.isPLetter(anothervar, currentchar)), 0x0f0f0fff, 1, 0, 0xfffe, 0)
+	Renderer.drawText("oxyfont_tiny", var, 45 + 40 * varI, stringformat("Act 2: %d %s %s", scr.getHighScoreString(anothervar1, currentchar), scr.rankToLetter(scr.getBestRankString(anothervar1, currentchar)), scr.isPLetter(anothervar1, currentchar)), 0x0f0f0fff, 1, 0, 0xfffe, 0)
+    // But I like spaghetti! Especially with vinegar
 
 }
 
@@ -150,7 +151,7 @@ function void DataSelect.drawCustomPlanes()
 	// Draw our own widescreen version of the background
 	// TODO: The actual background still gets rendered, though it's not visible at all
 	//  -> Maybe the plane W is used here?
-	Renderer.drawCustomSprite("background-a", getScreenExtend() - 40, 0, 0x00, 0, 0x2000)
+	Renderer.drawCustomSprite(scr.getDataSelectBackground(), getScreenExtend() - 40, 0, 0x00, 0, 0x2000)
 
 	// Custom rendering of plane B (which is not the background here) to ignore the wrapping
 	s16 px = s16(camera.foreground.x.u16)
@@ -169,5 +170,27 @@ function void DataSelect.drawCustomPlanes()
 
 function u64 scr.getDataSelectBackground()
 {
-    return "bg_dataselect"
+    /*
+        Heya Boomers*! This is not Megadroid speaking. You have to deal with ShadowXeldron instead, who is a mere hume (or a zombie-dragon. Or a Xeldron. Or a Sandslash; he can't decide)
+
+        I should probably explain what each of the backgrounds are meant to represent:
+
+        CHARACTER BACKGROUNDS - Backgrounds depicting the character. Obtained for getting either an A or S rank in any level as that character. You get a normal version for A ranks and a super version for S ranks.
+        ZONE BACKGROUNDS - These are the level backgrounds. You get them from earning an A rank in that zone as any character
+        GAME BACKGROUNDS - Earned for getting at least a certain rank in every zone with a certain character. This is a reference to how Metroid Dread gives you artwork of previous 2D Metroid games (and also Other M for some reason) depending how quickly you beat the game and what difficulty you are playing on
+        OTHER BACKGROUNDS - Some backgrounds are miscalaneous. See the comments for specifics
+
+    */
+
+    //return "bg_dataselect"
+    return "background-tails"
 }
+
+
+
+
+
+// *Boomer is a term that the Fleetway comic used to refer to its readers because 1. it was the 90s and 2. "Sonic Fan" wasn't an insult yet. The term is derived from "Sonic Boom" (not the song; we got the better soundtrack). It does not refer to people born between 1946 and 1964, although there's nothing to say that they couldn't be (Sonic) Boomers as well.
+
+
+

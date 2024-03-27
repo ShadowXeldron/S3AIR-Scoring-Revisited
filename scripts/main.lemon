@@ -39,11 +39,11 @@ global bool scr.isUsingCheats = 0 // This will be set to 1 if you use a "cheatin
 // Config variables
 global u8 scr.option.debugRankForcing // Remove when an actual score system is added
 global u8 scr.option.rankSprites // Toggle between custom sprites and ones based on SA2
-
+global u8 scr.option.menuBG // Currently set menu background
 
 //No parenthesis in statements.
 //oh no
-
+// 'tis what Python does to a person
 
 
 function void addScore(u32 value)
@@ -94,22 +94,21 @@ function void restartAtCheckpoint() // Don't go thinking you can get out of a st
 //This is so terribly useless.
 //use constant arrays.
 //i made one in results.lemon
+// U+1F44D\
 
 function string scr.rankToLetter(u8 rank) // Gives you a rank letter. Does not include P Ranks because they are saved seperately.
 {
-    if rank == 0
-        return " " // Returns a finger space to serve as an empty
-    else if rank == 1
-        return "E" 
-    else if rank == 2
-        return "D" 
-    else if rank == 3
-        return "C" 
-    else if rank == 4
-        return "B" 
-    else if rank == 5
-        return "A" 
-    else if rank == 6
-        return "S" 
+    constant array <string> rankLetters =
+    {
+        " ", // Blank
+        "E",
+        "D",
+        "C",
+        "B",
+        "A",
+        "S"
+    }
+
+    return rankLetters[rank]
 }
 

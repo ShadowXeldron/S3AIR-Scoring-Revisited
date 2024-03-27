@@ -74,7 +74,7 @@ function u32 scr.getHighScoreString(string act, u8 char) // user friendly zone f
 
 // Gen 1 is passable. Gets a C rank for being a good start.
 // Haven't played Gen 2. It's therefore unranked.
-// Gen 3 is, from what I've played, really good! It gets an A rank, but it's close to an A.
+// Gen 3 is, from what I've played, really good! It gets an A rank, but it's close to an S.
 // Gen 4 starts of slow but eventually picks up the slack to become an S rank
 // Gen 5 is the best one. Gets an S rank.
 // Gen 6 is alright. Gets a B rank.
