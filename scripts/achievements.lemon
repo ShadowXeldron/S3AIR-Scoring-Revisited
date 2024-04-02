@@ -17,7 +17,7 @@ constant array<string> RS_ACHIEVEMENTS_TITLE =
 	"First Rank",
 	"A-mazing!",
     "Saviour of Angel Island",
-    "Champion of Mobius", // I can alreayd hear people complaining about this
+    "Champion of Mobius", // I can already hear people complaining about this
     "Pointless",
     "Prickly Pacifists",
     "Perfection",

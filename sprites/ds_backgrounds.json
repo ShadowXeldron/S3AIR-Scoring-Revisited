@@ -29,22 +29,27 @@
 	"background-dez":  { "File": "background-dez1.png" },
 
 	// Game Backgrounds
-	"background-sonic-allc":  { "File": "background-tails.png" },
+    "background-sonic-all":  { "File": "background-tails.png" },	
+    "background-sonic-allc":  { "File": "background-tails.png" },
 	"background-sonic-allb":  { "File": "background-tails.png" },
 	"background-sonic-alla":  { "File": "background-tails.png" },
 	"background-sonic-alls":  { "File": "background-tails.png" },
 	"background-sonic-allp":  { "File": "background-tails.png" },
 
+	"background-tails-all":  { "File": "background-tails.png" },
 	"background-tails-allc":  { "File": "background-tails.png" },
 	"background-tails-allb":  { "File": "background-tails.png" },
 	"background-tails-alla":  { "File": "background-tails.png" },
 	"background-tails-alls":  { "File": "background-tails.png" },
 	"background-tails-allp":  { "File": "background-tails.png" },
 
+	"background-knux-all":  { "File": "background-tails.png" },
 	"background-knux-allc":  { "File": "background-tails.png" },
 	"background-knux-allb":  { "File": "background-tails.png" },
 	"background-knux-alla":  { "File": "background-tails.png" },
 	"background-knux-alls":  { "File": "background-tails.png" },
 	"background-knux-allp":  { "File": "background-tails.png" },
+
+    // Other Backgrounds
 
 }

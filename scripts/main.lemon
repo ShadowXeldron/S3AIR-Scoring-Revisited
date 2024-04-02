@@ -34,7 +34,8 @@ global u32 scr.levelScore = 0 // Seperate scoring value for the mod
 global u16 scr.coolBonus = 0 // The cool bonus from Sonic Mania. It starts at 1000 and is subtracted by 100 every time you get hit. In addition, dying will set it to 0.
 global u16 scr.coolBonusBackup = 0 // Cool bonus backup. This is only used to help with score scaling and therefore does nothing.
 global bool scr.shutmeup = 0 // Used soley to pevent a sound effect from going crazy
-global bool scr.isUsingCheats = 0 // This will be set to 1 if you use a "cheating" mod and will place an astersik by your ranking as well as prevent you fron getting S or P ranks
+global bool scr.isUsingCheats = false // This will be set to 1 if you use a "cheating" mod and will place an astersik by your ranking as well as prevent you fron getting S or P ranks
+global bool scr.showHUD = true // Set to 0 to hide the custom HUD. Used during the results screen.
 
 // Config variables
 global u8 scr.option.debugRankForcing // Remove when an actual score system is added

@@ -6,6 +6,7 @@
 	or https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
+global bool scr.isOnResultsScreen = 0
 global bool scr.isOnDEZ2ResultsScreen = 0
 global bool scr.endgame = 0
 
@@ -41,6 +42,17 @@ function u64 getResultsMusic()
 //# address-hook(0x02dc36) end(0x02dd38)
 function void LevelResults.UpdateBonusCounting()
 {
+	// Essentinally a complete rebuild of the vanilla function
+	Renderer.drawText("oxyfont_regular", 150, 15, stringformat("%s winned [sic]", scr.getCharName(getMainCharacter() + 1, false)), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_regular", 90, 60, stringformat("Level Score: %d", results.total_bonus), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_regular", 90, 75, stringformat("Time Bonus: %d", results.time_bonus), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_regular", 90, 90, stringformat("Ring Bonus: %d", results.ring_bonus), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_regular", 90, 105, stringformat("Cool Bonus: %d", scr.coolBonus), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_regular", 90, 120, stringformat("Total Score: %d", player.score), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_regular", 90, 135, stringformat("High Score: %d", scr.getHighScore(global.zone_act.apparent, global.characters)), 0xffffffff, 1, 0, 0xe000, 0)
+	
+
+
 	results.total_bonus = scr.levelScore
 
 	if (objA0.countdown_value != 0)
@@ -111,7 +123,6 @@ function void LevelResults.UpdateBonusCounting()
 	
 	else
 	{
-		
 		// Done
 
 		bool gotHighScore
@@ -121,12 +132,11 @@ function void LevelResults.UpdateBonusCounting()
 			gotHighScore = true
 			scr.saveRankData(global.zone_act.apparent, global.characters, scr.getStageRank(), 0) // Records your best rank.
 
-		Renderer.drawSprite(getRankSprite(), 175, 35, 100, 0x40, 0xe000)
+		Renderer.drawSprite(getRankSprite(), 275, 100, 100, 0x40, 0xe000) // TODO: Replace this with a spritehandle
 
         if (gotHighScore)
             Renderer.drawText("sonic3_fontC", 200, 100, "A brand new record!", 0xffffffff, 1, 0, 0xe000, 0)
     
-
 		if (scr.shutmeup == 0)
 		{
 			if (scr.getStageRank() == 6) // S Rank
@@ -144,6 +154,7 @@ function void LevelResults.UpdateBonusCounting()
 
 			if (gotHighScore)
 				Audio.playAudio("newrecord") // Da da da da da daaaaa!
+			
 			scr.shutmeup = 1
 		}
 
@@ -163,6 +174,8 @@ function void LevelResults.UpdateBonusCounting()
 
 			objA0.countdown_value = 90
 			objA0.base_state += 2
+
+			scr.isOnResultsScreen = 0
 			
 			
 			if global.zone_act.apparent == 0x1700
@@ -173,7 +186,9 @@ function void LevelResults.UpdateBonusCounting()
 
 			else
 			{
+				//objA0.update_address = 0x02dcca
 				LevelResults.AdvanceToNextAct()
+				scr.showHUD = true // Make the HUD visible
 			}
 		}
 	}
@@ -232,8 +247,10 @@ function bool DEZFinalBoss3.canPlayerEnterDoomsday()
 //# address-hook(0x02dae6) end(0x02dbc8)
 function void fn02dae6()
 {
+	scr.showHUD = false
+	scr.isOnResultsScreen = 1
 	playMusic(MUSIC_CTRL_FADEOUT)
-	//Renderer.drawText("oxyfont_regular", 100, 100, "YOU'RE WINNER!", 0xffffffff, 1, 0, 0xe000, 0)
+	//Renderer.drawText("oxyfont_regular", 250, 100, "YOU'RE WINNER!", 0xffffffff, 1, 0, 0xe000, 0)
 
 	/*
 	Kosinski.addToDMAQueue(0x0d6a62, 0xa400)		// Common results graphics
@@ -276,7 +293,7 @@ function void fn02dae6()
 	hud.dirty.timer = 0
     */
 	
-	results.time_bonus = scr.getTimeBonus() // Time bonus has been spun off into a seperate function
+	results.time_bonus = scr.getTimeBonus() // The bonuses have been spun off into a seperate function
 	results.ring_bonus = scr.getRingBonus()
 	
 	results.total_bonus = 0
@@ -285,13 +302,35 @@ function void fn02dae6()
 	objA0.base_state += 2
 }
 
+// All of these are intentionally set up to *NOT* render
+
 //# address-hook(0x02dd98) end(0x02dd9c)
 function void LevelResults.UpdateStaticTextDisplay()
 {
-	if (fn02de04())
-		return
-	DrawObject()
+	return
 }
+
+
+//# address-hook(0x02ddac) end(0x02ddb4)
+function void LevelResults.UpdateRingBonusDisplay()
+{
+	return
+}
+
+
+//# address-hook(0x02ddb6) end(0x02ddc0)
+function void LevelResults.UpdateTotalBonusDisplay()
+{
+	return
+}
+
+//# address-hook(0x02dda2) end(0x02ddaa)
+function void LevelResults.UpdateTimeBonusDisplay()
+{
+	return
+}
+*/
+
 
 function u16 scr.getTimeBonus() // Just a port of the original function
 {
@@ -333,7 +372,7 @@ function u16 scr.getTimeBonus() // Just a port of the original function
 		scoreBonus = 0
 
     return scoreBonus
-
+	// I wish S3AIR had case switching
 }
 
 function u16 scr.getRingBonus()
@@ -344,11 +383,87 @@ function u16 scr.getRingBonus()
 
 // TODO: Make it so that Big Rings reward 1000 points on the spot instead of 50 rings
 
+// Throwing compatibility out of the window for this
+//# address-hook(0x02dcca)
+function void LevelResults.AdvanceToNextAct()
+{
+#if STANDALONE
+	if (level.restart)
+	{
+		// Fix "frame-perfect reset" bug, but only for highest level of glitch fix setting
+		if (Game.getSetting(SETTING_FIX_GLITCHES) >= 2)
+		{
+			UnloadObject()
+			return
+		}
+	}
+#endif
 
+	/*
+	if (objA0.countdown_value != 0)
+	{
+		--objA0.countdown_value
+	}
 
+	if (u16[A0 + 0x30] != 0)
+	{
+		++objA0.value32
+	}
+	*/
 
+	level.wait_for_results = 0
 
+#if STANDALONE
+	Standalone.onLevelFinished()
+#endif
 
+	// Sky Sanctuary, Lava Reef Boss, Hidden Palace, or any Act 2?
+	if (global.zone == 0x0a || global.zone == 0x16 || global.act.apparent != 0)
+	{
+		level.results_done = 0xff
+		UnloadObject()
+		return
+	}
+
+	global.act.apparent = 1
+	checkpoint.number = 0
+	global.stage_type = 0
+
+	// Sandopolis, Death Egg use a small cutscene before showing the title card
+	if (global.zone == 0x08 || global.zone == 0x0b)
+	{
+		UnloadObject()
+		return
+	}
+
+	// Show title card for Act 2
+	objA0.update_address = addressof(TitleCard.Update)
+	objA0.base_state = 0
+	u8[A0 + 0x3e] = 0xff
+
+#if STANDALONE
+	Standalone.onLevelStart()
+
+	// Special handling for AIZ, when Knuckles uses Sonic's path
+	if (global.zone == 0x00 && isMainCharacter(CHARACTER_KNUCKLES) && camera.position.y.u16 < 0x400)
+	{
+		checkpoint.number = 4		// That number seems to be unused otherwise in whole AIZ
+		checkpoint.x = 0x1240
+		checkpoint.y = 0x0358
+		Checkpoint.SaveCurrentState()
+		checkpoint.move_area.bottom = 0x0590	// Overwrite move_area.bottom.* backup accordingly
+	}
+#endif
+}
+
+//# address-hook(0x018466) end(0x018680)
+function void fn018466()
+{
+	if (scr.isOnResultsScreen)
+		return // Disables underwater handling on the results screen
+	else
+		base.fn018466()
+}
 
 
 

@@ -1,5 +1,8 @@
+// NOTE TO CONTRIBUTORS: THIS FEATURE IS GOING TO BE REMOVED FROM LATER BUILDS OF THE MOD!
+// I have decided that trying to build the mod around extra slots is more trouble than it is worth. Not only that, I really don't want to have to work with a black box library which is backed by a toxic community.
+
 // Since the forums basically worship the extra slots, here's a namegen algorithm for them
-// Names from here but not followeed religiously: https://github.com/Cloudydude/ECSv8-Character-ID-Randomizer/blob/main/src/json/characters.json
+// Names from here but not followed religiously: https://github.com/Cloudydude/ECSv8-Character-ID-Randomizer/blob/main/src/json/characters.json
 // I don't know what's damaged my brain more - playing 32X games or reading that damn list. Hot take but extra slots are overrated.
 
 // Released or downloadable WIP skins on GameBanana take priority over unreleased ones that are reserved. You can't play as water vapour, can you?
@@ -48,7 +51,7 @@ constant array<string> SCR_ESNAMES = // Let's be real I haven't heard of most of
     "Extra Life", // 20
     "Rouge & Astra", // 21; whoever comes out first gets the title spot
     "CA22 Sonic", // 22
-    "CD Sonic", // 23 - https://gamebanana.com/mods/464490. The Geometry Dash icon is unreleased and gets no sympathy from be
+    "CD Sonic", // 23 - https://gamebanana.com/mods/464490. The Geometry Dash icon is unreleased and gets no sympathy from me
     "Barry Steakfries", // 24
     "Peashooter", // 25
     "Espio", // 26
@@ -123,7 +126,7 @@ constant array<string> SCR_ESNAMES = // Let's be real I haven't heard of most of
     "Waddle Dee", // 95
     "", // 96
     "", // 97
-    "", // 98
+    "Tim Folin", // 98; this is just an educated guess
     "C.H.C Jester", // 99
     "Ashuro", // 100, not to be confusted with Ashura. This guy's apparently a badger.
     "", // 101
@@ -199,7 +202,7 @@ constant array<string> SCR_ESNAMES = // Let's be real I haven't heard of most of
     "", // 171
     "", // 172
     "", // 173
-    "", // 174
+    "", // 174b
     "", // 175
     "", // 176
     "", // 177

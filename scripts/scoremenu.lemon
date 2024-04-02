@@ -42,10 +42,10 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
     string currentchar = 0
 
     bool esmode = 0
+    bool cleartext = false
 
     while (scr.scoreMenuIsActive == 1)
     {
-
         // Draw backgrounds
 
         // Write all of the text
@@ -57,53 +57,56 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
             This uses the stringformat function to generate a string containing the rank letter and high score for every act. I originally tried to use the internal global.zone_act
             values for this, but they didn't exactly work 
         */
-		
 
-		
-		DrawText(0, currentchar)
-		DrawText(1, currentchar)
-		DrawText(2, currentchar)
-		DrawText(3, currentchar)
-		DrawText(4, currentchar)
-		DrawText(5, currentchar)
-		DrawText(6, currentchar)
-		DrawText(7, currentchar)
-		DrawText(8, currentchar)
-		DrawText(9, currentchar)
-		DrawText(10, currentchar)
-		DrawText(11, currentchar)
-		
-		
+        DrawText(0, currentchar)
+        DrawText(1, currentchar)
+        DrawText(2, currentchar)
+        DrawText(3, currentchar)
+        DrawText(4, currentchar)
+        DrawText(5, currentchar)
+        DrawText(6, currentchar)
+        DrawText(7, currentchar)
+        DrawText(8, currentchar)
+        DrawText(9, currentchar)
+        DrawText(10, currentchar)
+        DrawText(11, currentchar)
+    	
         if (Input.buttonPressed(BUTTON_LEFT))
+        {
             if currentchar == 0
-                if true //Placeholder functionality, replace with Mods.isModActive("Extra Character Slots") eventually
-                {
-                    esmode = 1
-                    currentchar = 0
-                }
-                else
-                    currentchar = 4
+                currentchar = 4
             else
-                currentchar -= 1
+                --currentchar // Decrement currentchar
+            Audio.playAudio(SFX_CLICK)
+        }
+                
             
-        
-        if (Input.buttonPressed(BUTTON_RIGHT))
+        else if (Input.buttonPressed(BUTTON_RIGHT))
+        {
             if currentchar == 4
                 currentchar = 0
             else
-                currentchar += 1
-            //Audio.playAudio(SFX_CLICK)
-        
+                ++currentchar // Increment currentchar
+            Audio.playAudio(SFX_CLICK)
+        }
+            
 
-        if (Input.buttonPressed(BUTTON_B))
+        else if (Input.buttonPressed(BUTTON_B))
+        {
             scr.scoreMenuIsActive = 0
             //break
-        
-        waitForNextFrame() // The game dies of heart failure if you don't include this
-    }
+        }
+            
+        else if (Input.buttonPressed(BUTTON_BACK))
+        {
+            scr.scoreMenuIsActive = 0// Delete all scores
+        }
 
-    scr.scoreMenuIsActive = 0
-    //global.game_mode = 0x4c
+        waitForNextFrame() // The game dies of heart failure if you don't include this
+
+        //scr.scoreMenuIsActive = 0
+        //global.game_mode = 0x4c
+    }
 }
 
 function void DrawText(u8 i, string currentchar)
@@ -183,10 +186,58 @@ function u64 scr.getDataSelectBackground()
     */
 
     //return "bg_dataselect"
-    return "background-tails"
+    return CUSTOM_DATASELECT_BACKGROUNDS[scr.option.menuBG]
 }
 
-
+constant array<u64> CUSTOM_DATASELECT_BACKGROUNDS =
+{
+    "bg_dataselect",
+    "background-p",
+    "background-aiz",
+    "background-hcz",
+    "background-mgz",
+    "background-cnz",
+    "background-icz",
+    "background-lbz",
+    "background-fbz",
+    "background-soz",
+    "background-lrz",
+    "background-ssz",
+    "background-dez",
+    "background-s3",
+    "background-sk",
+    "background-sonic",
+    "background-tails",
+    "background-knux",
+    "background-supersonic",
+    "background-supertails",
+    "background-superknux",
+    "background-metalsonic",
+    "background-metaltails",
+    "background-metalknux",
+    "background-ddz",
+    "background-hpz",
+    "background-sea",
+    "background-sonic-all",
+    "background-sonic-allc",
+    "background-sonic-allb",
+    "background-sonic-alla",
+    "background-sonic-alls",
+    "background-sonic-allp",
+    "background-tails-all",
+    "background-tails-allc",
+    "background-tails-allb",
+    "background-tails-alla",
+    "background-tails-alls",
+    "background-tails-allp",
+    "background-knux-all",
+    "background-knux-allc",
+    "background-knux-allb",
+    "background-knux-alla",
+    "background-knux-alls",
+    "background-knux-allp",
+    "background-s",
+}
 
 
 

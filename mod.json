@@ -60,57 +60,58 @@
 				"InternalName": "TEMPORARY_WILL_BE_REMOVED_MenuBG",
 				"DisplayName": "Menu Background",
 				"Category": "REMOVE WHEN THE SECRETS HAVE BEEN ADDED",
-				"Variable": "scr.menuBG",
-				"DefaultValue": "0",
+				"Variable": "scr.option.menuBG",
+				"DefaultValue": "0x00",
 				"Options":
 				{
-					"0": "Vanilla",
-					"1": "Phantom Ruby", // Get all P Ranks
-					"2": "Angel Island", // A Rank either act of AIZ
-					"4": "Hydrocity", // A Rank either act of HCZ
-					"5": "Marble Garden", // A Rank either act of MGZ
-					"6": "Carnival Night", // A Rank either act of CNZ
-					"7": "Ice Cap", // A Rank either act of ICZ
-					"8": "Launch Base", // A Rank either act of LBZ
-					"9": "Mushroom Hill", // A Rank either act of MHZ
-					"10": "Flying Battery", // A Rank either act of FBZ
-					"11": "Sandopolis", // A Rank either act of SOZ
-					"12": "Lava Reef", // A Rank either act of LRZ
-					"13": "Sky Sanctuary", // A Rank either Act 1 of SSZ
-					"14": "Death Egg", // A Rank either act of DEZ
-					"15": "Sonic 3", // A Rank all acts of AIZ1 through LBZ2
-					"16": "Sonic & Knuckles", // A Rank all acts of MHZ1 through DEZ2
-					"17": "Sonic", // A Rank any act as Sonic
-					"18": "Tails", // A Rank any act as Tails
-					"19": "Knuckles", // A Rank any act as Knuckles
-					"20": "Super Sonic", // S Rank any act as Sonic
-					"21": "Super Tails", // A Rank any act as Tails
-					"22": "Super Knuckles", // A Rank any act as Knuckles
-					"23": "Metal Sonic", // P Rank any act as Sonic
-					"24": "Tails Doll", // P Rank any act as Tails
-					"25": "Mecha Knuckles", // P Rank any act as Knuckles
-					"26": "Doomsday Zone", // A Rank all acts as Sonic
-					"27": "Hidden Palace", // A Rank all acts as Knuckles
-					"28": "Angel Island Seas", // A Rank all acts as Tails
-					"29": "Sonic CD", // Get any rank on all acts as Sonic
-					"30": "Sonic 3D Blast", // C Rank all acts as Sonic
-					"31": "Sonic Advance 3", // B Rank all acts as Sonic
-					"32": "Sonic Mania", // A Rank all acts as Sonic
-					"33": "Sonic Adventure", // S Rank all acts as Sonic
-					"34": "Sonic '06", // P Rank all acts as Sonic
-					"35": "Sonic 2", // Get any rank on all acts as Sonic
-					"36": "Scene from any Sonic game depicting Tails", // C Rank all acts as Tails
-					"37": "Scene from any Sonic game depicting Tails", // B Rank all acts as Tails
-					"38": "Scene from any Sonic game depicting Tails", // A Rank all acts as Tails
-					"39": "Sonic Adventure", // S Rank all acts as Tails
-					"40": "Tails and the Music Maker", // P Rank all acts as Tails
-					"41": "Knuckles Chaotix", // Get any rank on all acts as Knuckles
-					"42": "Scene from any Sonic game depicting Tails", // C Rank all acts as Knuckles
-					"43": "Scene from any Sonic game depicting Tails", // B Rank all acts as Knuckles
-					"44": "Scene from any Sonic game depicting Tails", // A Rank all acts as Knuckles
-					"45": "Scene from any Sonic game depicting Tails", // S Rank all acts as Knuckles
-					"46": "Sonic Forces", // P Rank all acts as Knuckles
-					"47": "Sonic Heroes", // A Rank all acts as all three characters
+					"0x00": "Vanilla",
+					"0x01": "Phantom Ruby", // Get all P Ranks
+					"0x02": "Angel Island", // A Rank either act of AIZ
+					"0x04": "Hydrocity", // A Rank either act of HCZ
+					"0x05": "Marble Garden", // A Rank either act of MGZ
+					"0x06": "Carnival Night", // A Rank either act of CNZ
+					"0x07": "Ice Cap", // A Rank either act of ICZ
+					"0x08": "Launch Base", // A Rank either act of LBZ
+					"0x09": "Mushroom Hill", // A Rank either act of MHZ
+					"0x0A": "Flying Battery", // A Rank either act of FBZ
+					"0x0B": "Sandopolis", // A Rank either act of SOZ
+					"0x0C": "Lava Reef", // A Rank either act of LRZ
+					"0x0D": "Sky Sanctuary", // A Rank either Act 1 of SSZ
+					"0x0E": "Death Egg", // A Rank either act of DEZ
+					"0x0F": "Sonic 3", // A Rank all acts of AIZ1 through LBZ2
+					"0x10": "Sonic & Knuckles", // A Rank all acts of MHZ1 through DEZ2
+					"0x12": "Sonic", // A Rank any act as Sonic
+					"0x13": "Tails", // A Rank any act as Tails
+					"0x14": "Knuckles", // A Rank any act as Knuckles
+					"0x15": "Super Sonic", // S Rank any act as Sonic
+					"0x16": "Super Tails", // S Rank any act as Tails
+					"0x17": "Super Knuckles", // S Rank any act as Knuckles
+					"0x18": "Metal Sonic", // P Rank any act as Sonic
+					"0x19": "Tails Doll", // P Rank any act as Tails
+					"0x1A": "Mecha Knuckles", // P Rank any act as Knuckles
+					"0x1B": "Doomsday Zone", // A Rank all acts as Sonic
+					"0x1C": "Hidden Palace", // A Rank all acts as Knuckles
+					"0x1D": "Angel Island Seas", // A Rank all acts as Tails
+					"0x1E": "Sonic CD", // Get any rank on all acts as Sonic
+					"0x1F": "Sonic 3D Blast", // C Rank all acts as Sonic
+					"0x20": "Sonic Advance 3", // B Rank all acts as Sonic
+					"0x21": "Sonic Mania", // A Rank all acts as Sonic
+					"0x22": "Sonic Adventure 2", // S Rank all acts as Sonic
+					"0x23": "Sonic '06", // P Rank all acts as Sonic
+					"0x24": "Sonic 2", // Get any rank on all acts as Sonic
+					"0x25": "Tails Skypatrol", // C Rank all acts as Tails
+					"0x26": "Tails Adventure", // B Rank all acts as Tails
+					"0x27": "Scene from any Sonic game depicting Tails", // A Rank all acts as Tails
+					"0x28": "Sonic Adventure", // S Rank all acts as Tails
+					"0x29": "Tails and the Music Maker", // P Rank all acts as Tails
+					"0x2A": "Knuckles Chaotix", // Get any rank on all acts as Knuckles
+					"0x2B": "Scene from any Sonic game depicting Knuckles", // C Rank all acts as Knuckles
+					"0x2C": "Scene from any Sonic game depicting Knuckles", // B Rank all acts as Knuckles
+					"0x2D": "Scene from any Sonic game depicting Knuckles", // A Rank all acts as Knuckles
+					"0x2E": "Scene from any Sonic game depicting Knuckles", // S Rank all acts as Knuckles
+					"0x2F": "Sonic Forces", // P Rank all acts as Knuckles
+					"0x30": "Sonic Heroes", // A Rank all acts as all three characters
+					"0X31": "Chaos Emeralds", // Get all S Ranks
 
 				}
 			},
