@@ -1,4 +1,5 @@
 # S3AIR-Scoring-Revisited
+ [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) 
 
 ## THIS REPOSITORY IS NOT YET READY FOR GENERAL USAGE AND/OR DISTRIBUTION! THIS SHOULD NOT BE EXPECTED TO WORK AND THINGS ALMOST CERTAINLY WILL BREAK!
 
