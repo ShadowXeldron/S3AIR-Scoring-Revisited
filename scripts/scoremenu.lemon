@@ -35,9 +35,6 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
     scr.scoreMenuIsActive = 1
 
 	//Renderer.drawSprite("scoremenu-bg", 0, 0, 0, 0, 0xfffd)
-
-    SpriteHandle scoremenu_bg = Renderer.addSpriteHandle("scoremenu-bg", 0, 0, 0xfffd)
-    scoremenu_bg.setPriorityFlag(true)
 	
     string currentchar = 0
 
@@ -46,6 +43,11 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
 
     while (scr.scoreMenuIsActive == 1)
     {
+        SpriteHandle scoremenu_bg = Renderer.addSpriteHandle("scoremenu-bg", 0, 0, 0xfffd)
+        scoremenu_bg.setPriorityFlag(true)
+
+        Renderer.resetSprites()
+
         // Draw backgrounds
 
         // Write all of the text
@@ -70,6 +72,8 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
         DrawText(9, currentchar)
         DrawText(10, currentchar)
         DrawText(11, currentchar)
+        
+        waitForNextFrame()
     	
         if (Input.buttonPressed(BUTTON_LEFT))
         {
@@ -83,11 +87,13 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
             
         else if (Input.buttonPressed(BUTTON_RIGHT))
         {
+            scr.scoreMenuIsActive = 0
             if currentchar == 4
                 currentchar = 0
             else
                 ++currentchar // Increment currentchar
             Audio.playAudio(SFX_CLICK)
+            scr.scoreMenuIsActive = 1
         }
             
 
@@ -102,7 +108,7 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
             scr.scoreMenuIsActive = 0// Delete all scores
         }
 
-        waitForNextFrame() // The game dies of heart failure if you don't include this
+        //waitForNextFrame() // The game dies of heart failure if you don't include this
 
         //scr.scoreMenuIsActive = 0
         //global.game_mode = 0x4c
@@ -135,7 +141,6 @@ function void DrawText(u8 i, string currentchar)
 	Renderer.drawText("oxyfont_tiny", var, 35 + 40 * varI, stringformat("Act 1: %d %s %s", scr.getHighScoreString(anothervar, currentchar), scr.rankToLetter(scr.getBestRankString(anothervar, currentchar)), scr.isPLetter(anothervar, currentchar)), 0x0f0f0fff, 1, 0, 0xfffe, 0)
 	Renderer.drawText("oxyfont_tiny", var, 45 + 40 * varI, stringformat("Act 2: %d %s %s", scr.getHighScoreString(anothervar1, currentchar), scr.rankToLetter(scr.getBestRankString(anothervar1, currentchar)), scr.isPLetter(anothervar1, currentchar)), 0x0f0f0fff, 1, 0, 0xfffe, 0)
     // But I like spaghetti! Especially with vinegar
-
 }
 
 

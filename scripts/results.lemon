@@ -13,6 +13,9 @@ global bool scr.endgame = 0
 // Enable this if you are testing out the P rank, set it to 0 before commiting!
 #define PRANKTEST = 0
 
+// Enable this to allow the functions behind the vanilla results screen to run, allowing it to render
+#define SHOWVANILLARESULTS = 1
+
 constant array <u64> RANK_KEYS = 
 {
 	"e", "d", "c", "b", "a", "s", "p"
@@ -118,6 +121,7 @@ function void LevelResults.UpdateBonusCounting()
 		if ((level.framecounter & 0x03) == 0)
 		{
 			playSound(SFX_CLICK)
+			Input.setControllerRumble(-1, 0.0f, 0.25f, 100)
 		}
 	}
 	
@@ -125,11 +129,10 @@ function void LevelResults.UpdateBonusCounting()
 	{
 		// Done
 
-		bool gotHighScore
+		bool gotHighScore = scr.getStageRank() > scr.getBestRank(global.zone_act, global.characters)
 
 		scr.saveHighScore(global.zone_act.apparent, global.characters, 0)
-		if (scr.getStageRank() > scr.getBestRank(global.zone_act, global.characters))
-			gotHighScore = true
+		if (gotHighScore == true)
 			scr.saveRankData(global.zone_act.apparent, global.characters, scr.getStageRank(), 0) // Records your best rank.
 
 		Renderer.drawSprite(getRankSprite(), 275, 100, 100, 0x40, 0xe000) // TODO: Replace this with a spritehandle
@@ -178,7 +181,7 @@ function void LevelResults.UpdateBonusCounting()
 			scr.isOnResultsScreen = 0
 			
 			
-			if global.zone_act.apparent == 0x1700
+			if (global.zone_act.apparent == 0x1700)
 			{
 				scr.endgame = 1
 				objA0.update_address = 0x0803d6
@@ -304,6 +307,8 @@ function void fn02dae6()
 
 // All of these are intentionally set up to *NOT* render
 
+#if SHOWVANILLARESULTS == 0
+
 //# address-hook(0x02dd98) end(0x02dd9c)
 function void LevelResults.UpdateStaticTextDisplay()
 {
@@ -329,7 +334,8 @@ function void LevelResults.UpdateTimeBonusDisplay()
 {
 	return
 }
-*/
+
+#endif
 
 
 function u16 scr.getTimeBonus() // Just a port of the original function
@@ -383,6 +389,7 @@ function u16 scr.getRingBonus()
 
 // TODO: Make it so that Big Rings reward 1000 points on the spot instead of 50 rings
 
+/*
 // Throwing compatibility out of the window for this
 //# address-hook(0x02dcca)
 function void LevelResults.AdvanceToNextAct()
@@ -399,7 +406,6 @@ function void LevelResults.AdvanceToNextAct()
 	}
 #endif
 
-	/*
 	if (objA0.countdown_value != 0)
 	{
 		--objA0.countdown_value
@@ -409,7 +415,7 @@ function void LevelResults.AdvanceToNextAct()
 	{
 		++objA0.value32
 	}
-	*/
+	
 
 	level.wait_for_results = 0
 
@@ -464,7 +470,7 @@ function void fn018466()
 	else
 		base.fn018466()
 }
-
+*/
 
 
 
