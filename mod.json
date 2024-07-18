@@ -11,8 +11,28 @@
 
 	"Settings":
 	{
-		"List":
+		
+        "List":
 		[
+            {
+				"InternalName": "MenuButton",
+				"DisplayName": "Score Menu Button",
+				"Category": "Inputs",
+				"Variable": "scr.option.menuButton",
+				"DefaultValue": "0x09",
+				"Options":
+				{
+					"0x06": "A",
+					"0x04": "B",
+					"0x05": "X",
+					"0x09": "Y",
+					"0x0b": "Back",
+                    "0x07": "Start",
+                    "0x0a": "L",
+                    "0x08": "R",
+				}
+			},
+
 			{
 				"InternalName": "TEMPORARY_WILL_BE_REMOVED_RankIcon",
 				"DisplayName": "Rank Icon",
@@ -67,51 +87,53 @@
 					"0x00": "Vanilla",
 					"0x01": "Phantom Ruby", // Get all P Ranks
 					"0x02": "Angel Island", // A Rank either act of AIZ
-					"0x04": "Hydrocity", // A Rank either act of HCZ
-					"0x05": "Marble Garden", // A Rank either act of MGZ
-					"0x06": "Carnival Night", // A Rank either act of CNZ
-					"0x07": "Ice Cap", // A Rank either act of ICZ
-					"0x08": "Launch Base", // A Rank either act of LBZ
-					"0x09": "Mushroom Hill", // A Rank either act of MHZ
-					"0x0A": "Flying Battery", // A Rank either act of FBZ
-					"0x0B": "Sandopolis", // A Rank either act of SOZ
-					"0x0C": "Lava Reef", // A Rank either act of LRZ
-					"0x0D": "Sky Sanctuary", // A Rank either Act 1 of SSZ
-					"0x0E": "Death Egg", // A Rank either act of DEZ
-					"0x0F": "Sonic 3", // A Rank all acts of AIZ1 through LBZ2
-					"0x10": "Sonic & Knuckles", // A Rank all acts of MHZ1 through DEZ2
-					"0x12": "Sonic", // A Rank any act as Sonic
-					"0x13": "Tails", // A Rank any act as Tails
-					"0x14": "Knuckles", // A Rank any act as Knuckles
-					"0x15": "Super Sonic", // S Rank any act as Sonic
-					"0x16": "Super Tails", // S Rank any act as Tails
-					"0x17": "Super Knuckles", // S Rank any act as Knuckles
-					"0x18": "Metal Sonic", // P Rank any act as Sonic
-					"0x19": "Tails Doll", // P Rank any act as Tails
-					"0x1A": "Mecha Knuckles", // P Rank any act as Knuckles
-					"0x1B": "Doomsday Zone", // A Rank all acts as Sonic
-					"0x1C": "Hidden Palace", // A Rank all acts as Knuckles
-					"0x1D": "Angel Island Seas", // A Rank all acts as Tails
-					"0x1E": "Sonic CD", // Get any rank on all acts as Sonic
-					"0x1F": "Sonic 3D Blast", // C Rank all acts as Sonic
-					"0x20": "Sonic Advance 3", // B Rank all acts as Sonic
-					"0x21": "Sonic Mania", // A Rank all acts as Sonic
-					"0x22": "Sonic Adventure 2", // S Rank all acts as Sonic
-					"0x23": "Sonic '06", // P Rank all acts as Sonic
-					"0x24": "Sonic 2", // Get any rank on all acts as Sonic
-					"0x25": "Tails Skypatrol", // C Rank all acts as Tails
-					"0x26": "Tails Adventure", // B Rank all acts as Tails
-					"0x27": "Scene from any Sonic game depicting Tails", // A Rank all acts as Tails
-					"0x28": "Sonic Adventure", // S Rank all acts as Tails
-					"0x29": "Tails and the Music Maker", // P Rank all acts as Tails
-					"0x2A": "Knuckles Chaotix", // Get any rank on all acts as Knuckles
-					"0x2B": "Scene from any Sonic game depicting Knuckles", // C Rank all acts as Knuckles
-					"0x2C": "Scene from any Sonic game depicting Knuckles", // B Rank all acts as Knuckles
-					"0x2D": "Scene from any Sonic game depicting Knuckles", // A Rank all acts as Knuckles
-					"0x2E": "Scene from any Sonic game depicting Knuckles", // S Rank all acts as Knuckles
-					"0x2F": "Sonic Forces", // P Rank all acts as Knuckles
-					"0x30": "Sonic Heroes", // A Rank all acts as all three characters
-					"0X31": "Chaos Emeralds", // Get all S Ranks
+					"0x03": "Hydrocity", // A Rank either act of HCZ
+					"0x04": "Marble Garden", // A Rank either act of MGZ
+					"0x05": "Carnival Night", // A Rank either act of CNZ
+					"0x06": "Ice Cap", // A Rank either act of ICZ
+					"0x07": "Launch Base", // A Rank either act of LBZ
+					"0x08": "Mushroom Hill", // A Rank either act of MHZ
+					"0x09": "Flying Battery", // A Rank either act of FBZ
+					"0x0A": "Sandopolis", // A Rank either act of SOZ
+					"0x0B": "Lava Reef", // A Rank either act of LRZ
+					"0x0C": "Sky Sanctuary", // A Rank either Act 1 of SSZ
+					"0x0D": "Death Egg", // A Rank either act of DEZ
+					"0x0E": "Sonic 3", // A Rank all acts of AIZ1 through LBZ2
+					"0x0F": "Sonic & Knuckles", // A Rank all acts of MHZ1 through DEZ2
+
+					"0x10": "Sonic", // A Rank any act as Sonic
+					"0x11": "Tails", // A Rank any act as Tails
+					"0x12": "Knuckles", // A Rank any act as Knuckles
+					"0x13": "Super Sonic", // S Rank any act as Sonic
+					"0x14": "Super Tails", // S Rank any act as Tails
+					"0x15": "Super Knuckles", // S Rank any act as Knuckles
+					"0x16": "Metal Sonic", // P Rank any act as Sonic
+					"0x17": "Tails Doll", // P Rank any act as Tails
+					"0x18": "Mecha Knuckles", // P Rank any act as Knuckles
+					"0x19": "Doomsday Zone", // A Rank all acts as Sonic
+					"0x1A": "Hidden Palace", // A Rank all acts as Knuckles
+					"0x1B": "Angel Island Seas", // A Rank all acts as Tails
+					"0x1C": "Sonic CD", // Get any rank on all acts as Sonic
+					"0x1D": "Sonic 3D Blast", // C Rank all acts as Sonic
+					"0x1E": "Sonic Advance 3", // B Rank all acts as Sonic
+					"0x1F": "Sonic Mania", // A Rank all acts as Sonic
+
+					"0x20": "Sonic Adventure 2", // S Rank all acts as Sonic
+					"0x21": "Sonic '06", // P Rank all acts as Sonic
+					"0x22": "Sonic 2", // Get any rank on all acts as Sonic
+					"0x23": "Tails Skypatrol", // C Rank all acts as Tails
+					"0x24": "Tails Adventure", // B Rank all acts as Tails
+					"0x25": "Scene from any Sonic game depicting Tails", // A Rank all acts as Tails
+					"0x26": "Sonic Adventure", // S Rank all acts as Tails
+					"0x27": "Tails and the Music Maker", // P Rank all acts as Tails
+					"0x28": "Knuckles Chaotix", // Get any rank on all acts as Knuckles
+					"0x29": "Scene from any Sonic game depicting Knuckles", // C Rank all acts as Knuckles
+					"0x2A": "Scene from any Sonic game depicting Knuckles", // B Rank all acts as Knuckles
+					"0x2B": "Scene from any Sonic game depicting Knuckles", // A Rank all acts as Knuckles
+					"0x2C": "Scene from any Sonic game depicting Knuckles", // S Rank all acts as Knuckles
+					"0x2D": "Sonic Forces", // P Rank all acts as Knuckles
+					"0x2E": "Sonic Heroes", // A Rank all acts as all three characters
+					"0x2F": "Chaos Emeralds", // Get all S Ranks
 
 				}
 			},

@@ -15,7 +15,7 @@ function void DrawObject()
 //# address-hook(0x00d7c0) end(0x00d7e6)
 function void fn00d7c0() // fn00d96a and fn00d7c0 were here
 {
-    if (Input.buttonPressed(BUTTON_Y))
+    if (Input.buttonPressed(scr.option.menuButton)) // Replace this with a configurable option
     {
         playSound(0xaf)
         //global.game_mode = 0xEA
@@ -33,7 +33,6 @@ function void fn00d7c0() // fn00d96a and fn00d7c0 were here
 function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It also contains the worst case of write-only spaghetti code that I have ever produced.
 {
     scr.scoreMenuIsActive = 1
-
 	//Renderer.drawSprite("scoremenu-bg", 0, 0, 0, 0, 0xfffd)
 	
     string currentchar = 0
@@ -73,6 +72,13 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
         DrawText(10, currentchar)
         DrawText(11, currentchar)
         
+        // Print controls here 
+        Renderer.drawText("oxyfont_tiny", 230, 130, "A - Do something", 0x0f0f0fff, 1, 0, 0xfffe, 0)
+        Renderer.drawText("oxyfont_tiny", 230, 145, "B - Clear Data", 0x0f0f0fff, 1, 0, 0xfffe, 0)
+        Renderer.drawText("oxyfont_tiny", 230, 160, "X - Close menu", 0x0f0f0fff, 1, 0, 0xfffe, 0)
+        Renderer.drawText("oxyfont_tiny", 230, 175, "Y - Access secrets", 0x0f0f0fff, 1, 0, 0xfffe, 0)
+
+
         waitForNextFrame()
     	
         if (Input.buttonPressed(BUTTON_LEFT))
@@ -94,12 +100,25 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
                 ++currentchar // Increment currentchar
             Audio.playAudio(SFX_CLICK)
             scr.scoreMenuIsActive = 1
+        }            
+
+        else if (Input.buttonPressed(BUTTON_A))
+        {
+            Audio.playAudio(SFX_DROWN)
+            scr.clearAllScoreData()
+            scr.saveHighScore(0x0B01, 0, true)
+            //break
         }
-            
 
         else if (Input.buttonPressed(BUTTON_B))
         {
             scr.scoreMenuIsActive = 0
+            //break
+        }
+
+        else if (Input.buttonPressed(BUTTON_Y))
+        {
+            Audio.playAudio(SFX_RING_ALT)
             //break
         }
             
@@ -196,15 +215,16 @@ function u64 scr.getDataSelectBackground()
 
 constant array<u64> CUSTOM_DATASELECT_BACKGROUNDS =
 {
-    "bg_dataselect",
-    "background-p",
-    "background-aiz",
-    "background-hcz",
-    "background-mgz",
-    "background-cnz",
-    "background-icz",
-    "background-lbz",
-    "background-fbz",
+    "bg_dataselect",    // 0x00
+    "background-p",     // 0x01
+    "background-aiz",   // 0x02
+    "background-hcz",   // 0x03
+    "background-mgz",   // 0x04
+    "background-cnz",   // 0x05
+    "background-icz",   // 0x06
+    "background-lbz",   // 0x07
+    "background-mhz",   // 0x08
+    "background-fbz",   // 0x09
     "background-soz",
     "background-lrz",
     "background-ssz",
@@ -248,5 +268,146 @@ constant array<u64> CUSTOM_DATASELECT_BACKGROUNDS =
 
 // *Boomer is a term that the Fleetway comic used to refer to its readers because 1. it was the 90s and 2. "Sonic Fan" wasn't an insult yet. The term is derived from "Sonic Boom" (not the song; we got the better soundtrack). It does not refer to people born between 1946 and 1964, although there's nothing to say that they couldn't be (Sonic) Boomers as well.
 
+// Anyway, this is the nuclear option
+function void scr.clearAllScoreData()
+{
+    // TODO: Make this more optimal
 
+    scr.saveHighScore(0x0000, 0, true)
+    scr.saveHighScore(0x0000, 1, true)
+    scr.saveHighScore(0x0000, 2, true)
+    scr.saveHighScore(0x0000, 3, true)
+    scr.saveHighScore(0x0000, 4, true)
 
+    scr.saveHighScore(0x0001, 0, true)
+    scr.saveHighScore(0x0001, 1, true)
+    scr.saveHighScore(0x0001, 2, true)
+    scr.saveHighScore(0x0001, 3, true)
+    scr.saveHighScore(0x0001, 4, true)
+
+    scr.saveHighScore(0x0100, 0, true)
+    scr.saveHighScore(0x0100, 1, true)
+    scr.saveHighScore(0x0100, 2, true)
+    scr.saveHighScore(0x0100, 3, true)
+    scr.saveHighScore(0x0100, 4, true)
+
+    scr.saveHighScore(0x0101, 0, true)
+    scr.saveHighScore(0x0101, 1, true)
+    scr.saveHighScore(0x0101, 2, true)
+    scr.saveHighScore(0x0101, 3, true)
+    scr.saveHighScore(0x0101, 4, true)
+
+    scr.saveHighScore(0x0200, 0, true)
+    scr.saveHighScore(0x0200, 1, true)
+    scr.saveHighScore(0x0200, 2, true)
+    scr.saveHighScore(0x0200, 3, true)
+    scr.saveHighScore(0x0200, 4, true)
+
+    scr.saveHighScore(0x0201, 0, true)
+    scr.saveHighScore(0x0201, 1, true)
+    scr.saveHighScore(0x0201, 2, true)
+    scr.saveHighScore(0x0201, 3, true)
+    scr.saveHighScore(0x0201, 4, true)
+
+    scr.saveHighScore(0x0300, 0, true)
+    scr.saveHighScore(0x0300, 1, true)
+    scr.saveHighScore(0x0300, 2, true)
+    scr.saveHighScore(0x0300, 3, true)
+    scr.saveHighScore(0x0300, 4, true)
+
+    scr.saveHighScore(0x0301, 0, true)
+    scr.saveHighScore(0x0301, 1, true)
+    scr.saveHighScore(0x0301, 2, true)
+    scr.saveHighScore(0x0301, 3, true)
+    scr.saveHighScore(0x0301, 4, true)
+
+    scr.saveHighScore(0x0400, 0, true)
+    scr.saveHighScore(0x0400, 1, true)
+    scr.saveHighScore(0x0400, 2, true)
+    scr.saveHighScore(0x0400, 3, true)
+    scr.saveHighScore(0x0400, 4, true)
+
+    scr.saveHighScore(0x0401, 0, true)
+    scr.saveHighScore(0x0401, 1, true)
+    scr.saveHighScore(0x0401, 2, true)
+    scr.saveHighScore(0x0401, 3, true)
+    scr.saveHighScore(0x0401, 4, true)
+
+    scr.saveHighScore(0x0500, 0, true)
+    scr.saveHighScore(0x0500, 1, true)
+    scr.saveHighScore(0x0500, 2, true)
+    scr.saveHighScore(0x0500, 3, true)
+    scr.saveHighScore(0x0500, 4, true)
+
+    scr.saveHighScore(0x0501, 0, true)
+    scr.saveHighScore(0x0501, 1, true)
+    scr.saveHighScore(0x0501, 2, true)
+    scr.saveHighScore(0x0501, 3, true)
+    scr.saveHighScore(0x0501, 4, true)
+
+    scr.saveHighScore(0x0600, 0, true)
+    scr.saveHighScore(0x0600, 1, true)
+    scr.saveHighScore(0x0600, 2, true)
+    scr.saveHighScore(0x0600, 3, true)
+    scr.saveHighScore(0x0600, 4, true)
+
+    scr.saveHighScore(0x0601, 0, true)
+    scr.saveHighScore(0x0601, 1, true)
+    scr.saveHighScore(0x0601, 2, true)
+    scr.saveHighScore(0x0601, 3, true)
+    scr.saveHighScore(0x0601, 4, true)
+
+    scr.saveHighScore(0x0700, 0, true)
+    scr.saveHighScore(0x0700, 1, true)
+    scr.saveHighScore(0x0700, 2, true)
+    scr.saveHighScore(0x0700, 3, true)
+    scr.saveHighScore(0x0700, 4, true)
+
+    scr.saveHighScore(0x0701, 0, true)
+    scr.saveHighScore(0x0701, 1, true)
+    scr.saveHighScore(0x0701, 2, true)
+    scr.saveHighScore(0x0701, 3, true)
+    scr.saveHighScore(0x0701, 4, true)
+
+    scr.saveHighScore(0x0800, 0, true)
+    scr.saveHighScore(0x0800, 1, true)
+    scr.saveHighScore(0x0800, 2, true)
+    scr.saveHighScore(0x0800, 3, true)
+    scr.saveHighScore(0x0800, 4, true)
+
+    scr.saveHighScore(0x0801, 0, true)
+    scr.saveHighScore(0x0801, 1, true)
+    scr.saveHighScore(0x0801, 2, true)
+    scr.saveHighScore(0x0801, 3, true)
+    scr.saveHighScore(0x0801, 4, true)
+
+    scr.saveHighScore(0x0900, 0, true)
+    scr.saveHighScore(0x0900, 1, true)
+    scr.saveHighScore(0x0900, 2, true)
+    scr.saveHighScore(0x0900, 3, true)
+    scr.saveHighScore(0x0900, 4, true)
+
+    scr.saveHighScore(0x0901, 0, true)
+    scr.saveHighScore(0x0901, 1, true)
+    scr.saveHighScore(0x0901, 2, true)
+    scr.saveHighScore(0x0901, 3, true)
+    scr.saveHighScore(0x0901, 4, true)
+
+    scr.saveHighScore(0x0A00, 0, true)
+    scr.saveHighScore(0x0A00, 1, true)
+    scr.saveHighScore(0x0A00, 2, true)
+    scr.saveHighScore(0x0A00, 3, true)
+    scr.saveHighScore(0x0A00, 4, true)
+
+    scr.saveHighScore(0x0B00, 0, true)
+    scr.saveHighScore(0x0B00, 1, true)
+    scr.saveHighScore(0x0B00, 2, true)
+    scr.saveHighScore(0x0B00, 3, true)
+    scr.saveHighScore(0x0B00, 4, true)
+
+    scr.saveHighScore(0x0B01, 0, true)
+    scr.saveHighScore(0x0B01, 1, true)
+    scr.saveHighScore(0x0B01, 2, true)
+    scr.saveHighScore(0x0B01, 3, true)
+    scr.saveHighScore(0x0B01, 4, true)    
+}

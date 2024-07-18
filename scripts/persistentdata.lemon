@@ -1,25 +1,27 @@
-// NOTE TO THOSE MAKING MODIFIED VERSIONS: Change all instances of "ShadowXeldron" to your username (or anything else really) to avoid data corruption.
+// NOTE TO THOSE MAKING MODIFIED VERSIONS: Change all instances of "ShadowXeldron" to your username (or anything else really) to avoid data corruption. You should also point it to a different file as well.
 // If you're just looking at the code to see how it works, there's no need to do anything
+
+// [INSERT VERSION HERE] added improved persistent data
 
 function void scr.saveRankData(u16 act, u8 char, u8 rank, bool forced) // Records rank data to persistent memory. Because P Ranks are the antithesis to the entire mod, they are recorded seperately.
 {
    string actID = scr.getActID(act)
    string charID = scr.getCharID(char)
 
-   System.savePersistentData(0x2EBCDA, stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), rank)
+   System.savePersistentData(0x2EBCDA, rank, "scr_data", stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), true)
 }
 
 function u8 scr.getBestRank(u16 act, u8 char)
 {
    string actID = scr.getActID(act)
    string charID = scr.getCharID(char)
-   return System.loadPersistentData(0x2EBCDA, stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), 6) // I honestly can't actually think of a better way to implement this 
+   return System.loadPersistentData(0x2EBCDA, 0xFF, "scr_data", stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), true)
 }
 
 function u8 scr.getBestRankString(string actID, u8 char)
 {
    string charID = scr.getCharID(char)
-   return System.loadPersistentData(0x2EBCDA, stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), 6) // I honestly can't actually think of a better way to implement this 
+   return System.loadPersistentData(0x2EBCDA, 0xFF, "scr_data", stringformat("ShadowXeldron-SCR_RankData_%s_%s", actID, charID), true) // I honestly can't actually think of a better way to implement this 
 }
 
 
@@ -29,9 +31,9 @@ function void scr.savePRank(u16 act, u8 char, bool remove) // Records whether or
    string charID = scr.getCharID(char)
 
    if remove == true
-      System.savePersistentData(0x2E9999, stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), 0) // Strips you of your P rank for being a pile of poo
+      System.savePersistentData(0x2E9999, 0, "scr_data", stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), true) // Strips you of your P rank for being a pile of poo
    else
-      System.savePersistentData(0x2E9999, stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), 1) // Sets the P rank for that particual act (DDZ doesn't have one)
+      System.savePersistentData(0x2E9999, 1, "scr_data", stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), true) // Sets the P rank for that particual act (DDZ doesn't have one)
 }
 
 function bool scr.hasPRank(u16 act, u8 char) // Returns whether or not you're a passionate pacifist perfectionist pro
@@ -39,13 +41,13 @@ function bool scr.hasPRank(u16 act, u8 char) // Returns whether or not you're a 
    string actID = scr.getActID(act)
    string charID = scr.getCharID(char)
 
-   return System.loadPersistentData(0x2E9999, stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), 1)
+   return System.loadPersistentData(0x2E9999, 0xFF, "scr_data", stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), true)
 }
 
 function bool scr.hasPRankString(string actID, u8 char) // P Rank checker, but it's not a numberjacl
 {
    string charID = scr.getCharID(char)
-   return System.loadPersistentData(0x2E9999, stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), 1)
+   return System.loadPersistentData(0x2E9999, 0xFF, "scr_data", stringformat("ShadowXeldron-SCR_PRankData_%s_%s", actID, charID), true)
 }
 
 function void scr.saveHighScore(u16 act, u8 char, bool remove) // To be used with global.zone_act
@@ -54,26 +56,26 @@ function void scr.saveHighScore(u16 act, u8 char, bool remove) // To be used wit
    string charID = scr.getCharID(char)
 
    if remove == true
-      System.savePersistentData(0x2E0000, stringformat("ShadowXeldron-SCR_HighScore_%s_%s", actID, charID), 0) // Removes high score
+      System.savePersistentData(0x2E0000, 0, "scr_data", stringformat("ShadowXeldron-SCR_HighScore_%s_%s", actID, charID), true) // Removes high score
    else if scr.levelScore > scr.getHighScore(act, char)
-      System.savePersistentData(0x2E0000, stringformat("ShadowXeldron-SCR_HighScore_%s_%s", actID, charID), scr.levelScore) // Saves high score
+      System.savePersistentData(0x2E0000, scr.levelScore, "scr_data", stringformat("ShadowXeldron-SCR_HighScore_%s_%s", actID, charID), true) // Saves high score
 }
 
 function u32 scr.getHighScore(u16 act, u8 char) // for use with global.zone_act
 {
    string actID = scr.getActID(act)
    string charID = scr.getCharID(char)
-   return System.loadPersistentData(0x2E0000, stringformat("ShadowXeldron-SCR_HighScore_%s_%s", actID, charID), 0xFFFFFF) // Loads high score
+   return System.loadPersistentData(0x2E0000, 0xFFFFFFFF, "scr_data", stringformat("ShadowXeldron-SCR_HighScore_%s_%s", actID, charID), true) // Loads high score
 }
 
 function u32 scr.getHighScoreString(string act, u8 char) // user friendly zone forcing
 {
    string charID = scr.getCharID(char)
-   return System.loadPersistentData(0x2E0000, stringformat("ShadowXeldron-SCR_HighScore_%s_%s", act, charID), 0xFFFFFF) // Loads high score
+   return System.loadPersistentData(0x2E0000, 0xFFFFFFFF, "scr_data", stringformat("ShadowXeldron-SCR_HighScore_%s_%s", act, charID), true) // Loads high score
 }
 
 // Gen 1 is passable. Gets a C rank for being a good start.
-// Haven't played Gen 2. It's therefore unranked.
+// Gen 2 is an objective improvement over Gen 1 in every way. Gets a B rank.
 // Gen 3 is, from what I've played, really good! It gets an A rank, but it's close to an S.
 // Gen 4 starts of slow but eventually picks up the slack to become an S rank
 // Gen 5 is the best one. Gets an S rank.
@@ -219,6 +221,7 @@ function string scr.getCharID(u8 char) // This is used to decide who your charat
    }
    
    else // I can't be bothered to add unique handling for every extra slot in existence.
+      assert("Extra slot mods are not supported!")
       return stringformat("ES_%d", u8[0xffffE654])
 
 }
