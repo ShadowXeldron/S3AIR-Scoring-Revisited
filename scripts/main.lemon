@@ -110,9 +110,6 @@ function void restartAtCheckpoint() // Don't go thinking you can get out of a st
     base.restartAtCheckpoint()
 }
 
-
-
-
 //This is so terribly useless.
 //use constant arrays.
 //i made one in results.lemon

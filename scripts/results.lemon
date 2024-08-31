@@ -14,7 +14,7 @@ global bool scr.endgame = 0
 #define PRANKTEST = 0
 
 // Enable this to allow the functions behind the vanilla results screen to run, allowing it to render
-#define SHOWVANILLARESULTS = 1
+#define SHOWVANILLARESULTS = 0
 
 constant array <u64> RANK_KEYS = 
 {
@@ -54,8 +54,6 @@ function void LevelResults.UpdateBonusCounting()
 	Renderer.drawText("oxyfont_regular", 90, 120, stringformat("Total Score: %d", player.score), 0xffffffff, 1, 0, 0xe000, 0)
 	Renderer.drawText("oxyfont_regular", 90, 135, stringformat("High Score: %d", scr.getHighScore(global.zone_act.apparent, global.characters)), 0xffffffff, 1, 0, 0xe000, 0)
 	
-
-
 	results.total_bonus = scr.levelScore
 
 	if (objA0.countdown_value != 0)
@@ -190,8 +188,10 @@ function void LevelResults.UpdateBonusCounting()
 			else
 			{
 				//objA0.update_address = 0x02dcca
+				objA0.countdown_value = 90
+				objA0.base_state = 0x06
 				LevelResults.AdvanceToNextAct()
-				scr.showHUD = true // Make the HUD visible
+				scr.showHUD = true // Make the HUD visible	
 			}
 		}
 	}
@@ -308,7 +308,7 @@ function void fn02dae6()
 // All of these are intentionally set up to *NOT* render
 
 #if SHOWVANILLARESULTS == 0
-
+/*
 //# address-hook(0x02dd98) end(0x02dd9c)
 function void LevelResults.UpdateStaticTextDisplay()
 {
@@ -333,6 +333,73 @@ function void LevelResults.UpdateTotalBonusDisplay()
 function void LevelResults.UpdateTimeBonusDisplay()
 {
 	return
+}
+
+//# address-hook(0x02ddc6) end(0x02de02)
+function void fn02ddc6()
+{
+	return
+}
+
+//# address-hook(0x02de50) end(0x02de78)
+function void fn02de50()
+{
+	return //true
+}*/
+
+//# address-hook(0x02dbca) end(0x02dc34)
+//# address-hook(0x02dbca) end(0x02dc34)
+function void fn02dbca()
+{
+	if (kosinski.waiting_modules != 0)
+		return
+
+	//Create the HUD elements
+	if (allocDynamicObjectAfterA0())
+	{
+		A2 = 0x02deba
+		D1 = 11
+
+		while (D1.s16 >= 0)
+		{
+			objA1.update_address = u32[A2]
+			objA1.render_flags = render_flag.COMPOUND
+			u16[A1 + 0x46] = u16[A2+4]
+			//objA1.position.x.u16 = u16[A2+6]
+			//objA1.position.y.u16 = u16[A2+8]
+			u8[A1 + 0x05] = (s16[A1 + 0x10] >= 0) ? 0xff : 0x00
+			u8[A1 + 0x22] = u8[A2+10]
+			objA1.box_size.x = u8[A2+11]
+			u8[A1 + 0x28] = u16[A2+12]
+			objA1.mapping_offset = 0x02f26a
+			u16[A1 + 0x48] = A0.u16
+			A2 += 14
+
+			/*#if STANDALONE
+			{
+				// Move elements towards screen center
+				u16 offset = getScreenExtend()
+				objA1.position.x.u16 += offset
+				if (objA1.update_address != addressof(TitleCard.RedBarElement.Update))
+					u16[A1 + 0x46] += offset
+			}
+			#endif*/
+
+			--D1.s16
+			if (!allocDynamicObjectAfterA1())
+				break
+		}
+
+		objA0.base_state += 2
+		if (global.act.apparent == 0)
+		{
+			// AIZ and ICZ have some special handling of apparent vs. current act 1
+			if (global.zone.apparent != 0x00 && global.zone.apparent != 0x05)
+			{
+				u8[0xffffeec6] = 0xff
+			}
+		}
+	}
 }
 
 #endif
