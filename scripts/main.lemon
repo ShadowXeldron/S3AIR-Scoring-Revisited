@@ -23,7 +23,7 @@ include persistentdata
 include scoremenu
 include superforms // By being a nosy person you just spoiled yourself on the secret.
 include obligatoryaudiostuff // Absolutely mandatory for any mod I make
-include actselect // If you're using a version with support for the custom act select screen
+//include actselect // If you're using a version with support for the custom act select screen
 
 // Global variables
 global u32 scr.levelScore = 0 // Seperate scoring value for the mod
