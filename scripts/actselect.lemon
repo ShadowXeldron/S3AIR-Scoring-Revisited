@@ -1,3 +1,4 @@
+// EXTREMELY CRAP IMPLEMENTATION OF RANK AND SCORE DATA ON THE ACT SELECT SCREEN! IT IS ACTUALLY TERRIBLE!
 function void ActSelect.Menu(u8 fadeInMethod)
 {
     // Unfortunately the base function rudely uses a while loop. I get that it's good for optimisation but it also means I can't render custom text as easily

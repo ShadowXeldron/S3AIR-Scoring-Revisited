@@ -12,27 +12,8 @@
     - A super top secret bonus for those who can get all the A ranks
     - Overly dramatic E rank poses for the Unleashed fans in the back
 
-    PROBABLY WON'T HAPPEN ANYMORE
-
-    - Extra slot support (low priority because I don't actually like let alone use extra slots because they hog all the spotlight on the forums)
-    - Achievements plus support (should be banished to its own script file to maintain compatibility)
-/*
-    TO-DO LIST
-
-    - Actually add a real scoring system (HIGH PRIORITY!)
-    - Asterisks by the ranks if you're a speedy African feline; similar to what Frontiers does
-    - High score system that is recorded as save data (outright refuse to save score if debug mode is enabled at any point)
-    - Per-character scorecards accessible from the save select screen
-
-    WOULD BE NICE
-
-    - Moddable rank requirements for level creators
-    - A super top secret bonus for those who can get all the A ranks
-    - Overly dramatic E rank poses for the Unleashed fans in the back
-    - Extra slot support (low priority because I don't actually like let alone use extra slots because they hog all the spotlight on the forums)
-    - Achievements plus support (should be banished to its own script file to maintain compatibility)
-
 */
+
 
 // Other scripts to keep things neat and tidy
 include results // Note to self: This isn't Lua. We use "include" here, not "reqiure"
@@ -42,11 +23,7 @@ include persistentdata
 include scoremenu
 include superforms // By being a nosy person you just spoiled yourself on the secret.
 include obligatoryaudiostuff // Absolutely mandatory for any mod I make
-include esnames // A huge pile of names for extra slot mods based on the ES repository (NOTE: This will likely get removed)
-//include actselect // If you're using a version with support for the custom act select screen
-#if ACHIEVEMENTS_PLUS_ACTIVE
-include achievements  // If Achievements Plus is installed, gain access to achievements designed to use it
-#endif
+include actselect // If you're using a version with support for the custom act select screen
 
 // Global variables
 global u32 scr.levelScore = 0 // Seperate scoring value for the mod
@@ -129,4 +106,14 @@ function string scr.rankToLetter(u8 rank) // Gives you a rank letter. Does not i
     }
 
     return rankLetters[rank]
+}
+
+// Script to prevent drowning on the results screen
+//# address-hook(0x018466) end(0x018680)
+function void fn018466()
+{
+    if (scr.isOnResultsScreen != 0)
+        return
+    else
+        base.fn018466()
 }

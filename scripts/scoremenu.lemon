@@ -37,9 +37,6 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
 	
     string currentchar = 0
 
-    bool esmode = 0
-    bool cleartext = false
-
     while (scr.scoreMenuIsActive == 1)
     {
         SpriteHandle scoremenu_bg = Renderer.addSpriteHandle("scoremenu-bg", 0, 0, 0xfffd)
@@ -50,7 +47,7 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
         // Draw backgrounds
 
         // Write all of the text
-        Renderer.drawText("oxyfont_regular", 10, 10, stringformat("%s's Scorecard", scr.getCharName(currentchar, esmode)), 0x0f0f0fff, 1, 0, 0xfffe, 0)
+        Renderer.drawText("oxyfont_regular", 10, 10, stringformat("%s's Scorecard", CHAR_NAMES[currentchar]), 0x0f0f0fff, 1, 0, 0xfffe, 0)
 
         // I need a more effective way of doing this. Right now, we have the functions from hell. I did try a for loop, but it was glitchy.
         /*

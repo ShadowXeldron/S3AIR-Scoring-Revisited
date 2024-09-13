@@ -9,13 +9,12 @@ Work-in-progress Sonic 3 AIR mod that adds a ranking system to the game.
 
 ### Known Issues
 
-- When changing pages on the score menu, the original text still stays there
-- 
-- Achievements Plus support is only partially implemented as the custom achievements do not have triggers. It is notable that I'm probably going to cut Achievements Plus support however
+- Deleting saved records occurs automatically, only affects Sonic & Tails and has no confirmation.
+- You automatically drown after exiting the results screen if you're underwater
 
 ### Credits
 
 [montydoesgames](https://github.com/montydoesgames) - Rank sprite icons  
-[vmackg](https://github.com/vmackg) - Code quality improvements, score menu fixes
+[vmackg](https://github.com/vmackg) - Code quality improvements, score menu fixes  
 
 Contributions are welcome! Please open a pull request with your fixes.

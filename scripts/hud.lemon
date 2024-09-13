@@ -78,8 +78,9 @@ function void RenderHUD()
 			Renderer.drawText("oxyfont_small", 10, 90, stringformat("High Score: %d", scr.getHighScore(global.zone_act.apparent, global.characters)), 0xffffffff, 1, 0, 0xe000, 0)
 		}
 	}
+	// This **DOES NOT** return base, and it **DOES NOT** return base on purpose.
 }
 
 // The solution was, of course, to go at all the vanilla code with a hatchet.
 
-// Note that this included HUD is temporary
+// Note that this included HUD is temporary and will eventually be replaced with one that doesn't look like a wall of text
