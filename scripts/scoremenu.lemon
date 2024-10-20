@@ -1,5 +1,9 @@
 // // Data select and score stuff for my rankings mod which I really need a real name for
 
+// Option counts, counting up from zero
+constant u8 SCR_CHARACTER_COUNT = 4
+constant u8 SCR_MENU_OPTION_COUNT = 3
+
 global bool scr.scoreMenuIsActive = 0
 
 /*
@@ -15,6 +19,7 @@ function void DrawObject()
 //# address-hook(0x00d7c0) end(0x00d7e6)
 function void fn00d7c0() // fn00d96a and fn00d7c0 were here
 {
+    scr.showHUD = true
     if (Input.buttonPressed(scr.option.menuButton)) // Replace this with a configurable option
     {
         playSound(0xaf)
@@ -36,6 +41,8 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
 	//Renderer.drawSprite("scoremenu-bg", 0, 0, 0, 0, 0xfffd)
 	
     string currentchar = 0
+    
+    u8 menu_option
 
     while (scr.scoreMenuIsActive == 1)
     {
@@ -70,10 +77,10 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
         DrawText(11, currentchar)
         
         // Print controls here 
-        Renderer.drawText("oxyfont_tiny", 230, 130, "A - Do something", 0x0f0f0fff, 1, 0, 0xfffe, 0)
-        Renderer.drawText("oxyfont_tiny", 230, 145, "B - Clear Data", 0x0f0f0fff, 1, 0, 0xfffe, 0)
-        Renderer.drawText("oxyfont_tiny", 230, 160, "X - Close menu", 0x0f0f0fff, 1, 0, 0xfffe, 0)
-        Renderer.drawText("oxyfont_tiny", 230, 175, "Y - Access secrets", 0x0f0f0fff, 1, 0, 0xfffe, 0)
+        Renderer.drawText("oxyfont_tiny", 230, 130, stringformat("%sDo something", scr.showSelectedIcon(menu_option, 0)), 0x0f0f0fff, 1, 0, 0xfffe, 0)
+        Renderer.drawText("oxyfont_tiny", 230, 145, stringformat("%sClose menu", scr.showSelectedIcon(menu_option, 1)), 0x0f0f0fff, 1, 0, 0xfffe, 0)
+        Renderer.drawText("oxyfont_tiny", 230, 160, stringformat("%sDELETE SAVED DATA", scr.showSelectedIcon(menu_option, 2)), 0x0f0f0fff, 1, 0, 0xfffe, 0)
+        Renderer.drawText("oxyfont_tiny", 230, 175, stringformat("%sAccess Secrets", scr.showSelectedIcon(menu_option, 3)), 0x0f0f0fff, 1, 0, 0xfffe, 0)
 
 
         waitForNextFrame()
@@ -81,7 +88,7 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
         if (Input.buttonPressed(BUTTON_LEFT))
         {
             if currentchar == 0
-                currentchar = 4
+                currentchar = SCR_CHARACTER_COUNT
             else
                 --currentchar // Decrement currentchar
             Audio.playAudio(SFX_CLICK)
@@ -90,24 +97,72 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
             
         else if (Input.buttonPressed(BUTTON_RIGHT))
         {
-            scr.scoreMenuIsActive = 0
-            if currentchar == 4
+            if currentchar == SCR_CHARACTER_COUNT
                 currentchar = 0
             else
                 ++currentchar // Increment currentchar
             Audio.playAudio(SFX_CLICK)
-            scr.scoreMenuIsActive = 1
-        }            
-
-        else if (Input.buttonPressed(BUTTON_A))
+        }
+        
+        if (Input.buttonPressed(BUTTON_UP))
         {
-            Audio.playAudio(SFX_DROWN)
-            scr.clearAllScoreData()
-            scr.saveHighScore(0x0B01, 0, true)
-            //break
+            if menu_option == 0
+                menu_option = SCR_MENU_OPTION_COUNT
+            else
+                --menu_option // Decrement currentchar
+            Audio.playAudio(SFX_CLICK)
+        }
+        
+        else if (Input.buttonPressed(BUTTON_DOWN))
+        {
+            if menu_option == SCR_MENU_OPTION_COUNT
+                menu_option = 0
+            else
+                ++menu_option // Increment currentchar
+            Audio.playAudio(SFX_CLICK)
         }
 
-        else if (Input.buttonPressed(BUTTON_B))
+        else if (Input.buttonPressed(BUTTON_BACK) || Input.buttonPressed(BUTTON_B))
+        {
+            /*Audio.playAudio(SFX_DROWN)
+            scr.clearAllScoreData()
+            scr.saveHighScore(0x0B01, 0, true)
+            */
+            Audio.playAudio(0xad)
+            scr.scoreMenuIsActive = 0
+            //break
+        }
+        
+        else if (Input.buttonPressed(BUTTON_A))
+        {
+            // Match based on menu option
+            if menu_option == 0
+            {
+                Audio.playAudio(SFX_JUMP) // Placeholder behaviour until it does something or gets removed
+            }
+            
+            else if menu_option == 1 // Exit Menu
+            {
+                Audio.playAudio(0xad) // The back sound
+                scr.scoreMenuIsActive = 0
+            }
+            
+            else if menu_option == 2 // Delete EVERYTHING
+            {
+                // This should ideally bring up a confitmation prompt
+                scr.clearAllScoreData()
+                scr.saveHighScore(0x0B01, 0, true)
+                Audio.playAudio(SFX_DROWN)
+            }
+            
+            else if (menu_option == 3)
+            {
+                Audio.playAudio(SFX_RING_ALT) // Placeholder beavious
+                //break
+            }
+        }
+
+        /*else if (Input.buttonPressed(BUTTON_B))
         {
             scr.scoreMenuIsActive = 0
             //break
@@ -117,12 +172,7 @@ function void scr.openScoreMenu() // This is the rudimentaryest menu ever. It al
         {
             Audio.playAudio(SFX_RING_ALT)
             //break
-        }
-            
-        else if (Input.buttonPressed(BUTTON_BACK))
-        {
-            scr.scoreMenuIsActive = 0// Delete all scores
-        }
+        }*/
 
         //waitForNextFrame() // The game dies of heart failure if you don't include this
 
@@ -209,6 +259,19 @@ function u64 scr.getDataSelectBackground()
     //return "bg_dataselect"
     return CUSTOM_DATASELECT_BACKGROUNDS[scr.option.menuBG]
 }
+// Suddenly, Rust happened
+function string scr.showSelectedIcon(u8 current_option, u8 target_option)
+{
+    if current_option == target_option
+        return "> "
+    else
+        return "" // Basically nothing
+}
+
+/*function u32 scr.getSelectedColour
+{
+    
+}*/
 
 constant array<u64> CUSTOM_DATASELECT_BACKGROUNDS =
 {

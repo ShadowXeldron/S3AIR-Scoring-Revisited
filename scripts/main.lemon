@@ -117,3 +117,8 @@ function void fn018466()
     else
         base.fn018466()
 }
+
+function void ActSelect.Menu(u8 fadeInMethod)
+{
+    scr.showHUD = true
+}

@@ -54,7 +54,7 @@ function u64 getResultsMusic()
 function void LevelResults.UpdateBonusCounting()
 {
 	// Essentinally a complete rebuild of the vanilla function
-	Renderer.drawText("oxyfont_regular", 150, 15, stringformat("%s winned [sic]", CHAR_NAMES[getMainCharacter()], false), 0xffffffff, 1, 0, 0xe000, 0)
+	Renderer.drawText("oxyfont_regular", 150, 15, stringformat("%s winned [sic]", CHAR_NAMES[global.characters], false), 0xffffffff, 1, 0, 0xe000, 0)
 	Renderer.drawText("oxyfont_regular", 90, 60, stringformat("Level Score: %d", results.total_bonus), 0xffffffff, 1, 0, 0xe000, 0)
 	Renderer.drawText("oxyfont_regular", 90, 75, stringformat("Time Bonus: %d", results.time_bonus), 0xffffffff, 1, 0, 0xe000, 0)
 	Renderer.drawText("oxyfont_regular", 90, 90, stringformat("Ring Bonus: %d", results.ring_bonus), 0xffffffff, 1, 0, 0xe000, 0)
