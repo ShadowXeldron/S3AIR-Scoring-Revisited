@@ -8,7 +8,7 @@ ModRepo(
 		ModFile(
 			name: "Scoring Revisited",
 			description: "A work-in-progress mod that implements a ranking system for Sonic 3 AIR",
-			url: "https://github.com/ShadowXeldron/S3AIR-Scoring-Revisited.git",
+			url: "https://github.com/ShadowXeldron/S3AIR-Scoring-Revisited/archive/refs/heads/main.zip",
 			version: "0.0.1",
 			filename: "Scoring-Revisted.zip"
 		),
