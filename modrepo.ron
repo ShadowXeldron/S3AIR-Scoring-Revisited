@@ -1,7 +1,7 @@
 // This is included purely for testing reasons and is intended for a WIP project that won't be hosted on GitHub.
 ModRepo(
 	name: "ShadowXeldron's Sonic 3 AIR mods",
-	url: "www.example.com", // Replace this with a link to a copy of this file
+	url: "https://raw.githubusercontent.com/ShadowXeldron/S3AIR-Scoring-Revisited/refs/heads/main/modrepo.ron", // Replace this with a link to a copy of this file
 
 	contents: [
 		ModFile(
