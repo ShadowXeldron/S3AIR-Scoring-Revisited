@@ -153,12 +153,12 @@ function void LevelResults.UpdateBonusCounting()
 		{
 			if (scr.getStageRank() == 6) // S Rank
             {
-				Audio.playAudio(MUSIC_CHAOSEMERALD)
+				Audio.playAudio(MUSIC_CHAOSEMERALD, 0x00)
                 Game.setSecretUnlocked(0x12) // Getting an S rank will also unlock the game speed option because the Sonic 3 unlock code is nigh-impossible without a wired controller and a CRT or cheating via emulator slowdown
             }
 			else if (scr.getStageRank() == 7) // P Rank
 			{
-				Audio.playAudio("tada")
+				Audio.playAudio("tada", 0x00)
 				scr.savePRank(global.zone_act.apparent, global.characters, false)
 			}
 			else
