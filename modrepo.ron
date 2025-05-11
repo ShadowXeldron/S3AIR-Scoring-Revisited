@@ -1,0 +1,122 @@
+// This is included purely for testing reasons and is intended for a WIP project that won't be hosted on GitHub.
+// Simply put, I'm trying to make a program that can pull S3AIR mods based on definitions in a RON file.
+ModRepo(
+	name: "ShadowXeldron's Sonic 3 AIR mods",
+	url: "https://raw.githubusercontent.com/ShadowXeldron/S3AIR-Scoring-Revisited/refs/heads/main/modrepo.ron", // Replace this with a link to a copy of this file
+
+	contents: [
+		ModFile(
+			name: "Scoring Revisited",
+			description: "A work-in-progress mod that implements a ranking system for Sonic 3 AIR",
+			url: "https://github.com/ShadowXeldron/S3AIR-Scoring-Revisited/archive/refs/heads/main.zip",
+			version: "0.0.1",
+			filename: "Scoring-Revisted.zip"
+		),
+		
+		ModFile(
+		    name: "No SHC Splash",
+		    description: "Mod that adds dedicated music for each character",
+		    url: "https://github.com/ShadowXeldron/ShadowXeldrons-S3AIR-Mods/releases/download/New_PCT/Per-Character_Themes_v2_0_0.zip",
+		    version: "1.0.0",
+		    filename: "No SHC Splash.zip"
+		),
+		
+		ModFile(
+		    name: "Special Stage Results Music",
+		    description: "This mod adds music to the special stage results screen and changes it based on whether you failed or passed.",
+		    url: "https://github.com/ShadowXeldron/ShadowXeldrons-S3AIR-Mods/releases/download/EMTP/Special_Stage_Results_Music.zip",
+		    version: "1.0.0",
+		    filename: "No SHC Splash.zip"
+		),
+		
+		ModFile(
+		    name: "Custom Act Select Music",
+		    description: "Adds custom music to S3AIR's act select screen",
+		    url: "https://github.com/ShadowXeldron/ShadowXeldrons-S3AIR-Mods/releases/download/Act-Slect-Music/Custom_Act_Select_Music.zip",
+		    version: "1.0.0",
+		    filename: "Custom Act Select Music.zip"
+		),
+		
+		ModFile(
+		    name: "Sonic DS Music Pack",
+		    description: "Replaces the game's music with songs from the DS Sonic games (mostly Sonic Rush)",
+		    url: "https://github.com/ShadowXeldron/ShadowXeldrons-S3AIR-Mods/releases/download/DS-Pack-V3/Sonic_DS_Music_Pack-V3.zip",
+		    version: "3.0.0",
+		    filename: "Sonic DS Music Pack.zip"
+		),
+		
+		ModFile(
+		    name: "You Are Dead",
+		    description: "Mod that improves your lousy score",
+		    url: "https://github.com/ShadowXeldron/ShadowXeldrons-S3AIR-Mods/releases/download/DS-Pack-V3/You.Are.Dead.zip",
+		    version: "1.0.0",
+		    filename: "Custom Act Select Music"
+		),
+		
+		ModFile(
+		    name: "1-Up Sounds",
+		    description: "Adds multiple options to replace the 1-Up music without it stopping the current in-game music.",
+		    url: "https://github.com/ShadowXeldron/ShadowXeldrons-S3AIR-Mods/releases/download/DS-Pack-V3/You.Are.Dead.zip",
+		    version: "1.0.0",
+		    filename: "Custom Act Select Music"
+		),
+		
+		ModFile(
+		    name: "Per-Character Themes",
+		    description: "Mod that adds different themes and jingles for each character",
+		    url: "https://github.com/ShadowXeldron/ShadowXeldrons-S3AIR-Mods/releases/download/Stable-Release/No_SHC_Splash.zip",
+		    version: "2.0.0",
+		    filename: "Per-Character Themes.zip"
+		),
+		
+		ModFile(
+		    name: "Sonic Mania Unused Act Clear Jingle",
+		    description: "Replaces the act clear jingle with the unused one from Sonic Mania",
+		    url: "https://files.gamebanana.com/sounds/sonic_mania_unused_act_clear_jingle.zip",
+		    version: "1.0.0",
+		    filename: "Sonic Mania Unused Act Clear Jingle.zip"
+		),
+		
+		ModFile(
+		    name: "Sonic 3D Blast Saturn Special Stage Music",
+		    description: "Replaces the special stage theme with the one from the Saturn version of 3D Blast",
+		    url: "https://gamebanana.com/dl/834658",
+		    version: "1.0.0",
+		    filename: "Sonic Mania Unused Act Clear Jingle.zip"
+		),
+		
+		ModFile(
+		    name: "Quake 2 Jump Sound",
+		    description: "Replaces the standard jump sound with the one from Quake 2.",
+		    url: "https://gamebanana.com/dl/997317",
+		    version: "1.0.0",
+		    filename: "Quake 2 Jump Sound.zip"
+		),
+		
+		ModFile(
+		    name: "Sonic Origins Menu Theme",
+		    description: "Replaces S3AIR's menu theme with the one from Origins.",
+		    url: "https://gamebanana.com/dl/825346",
+		    version: "1.0.0",
+		    filename: "Sonic Origins Menu Theme.zip"
+		),
+		
+		ModFile(
+		    name: "16-Bit Wild Canyon and Death Chamber",
+		    description: "This replaces both acts of Sandopolis with the FM synthesied remixes of Wild Canyon (for act 1) and Death Chamber (for act 2) by JX.",
+		    url: "https://gamebanana.com/dl/813637",
+		    version: "1.0.0",
+		    filename: "16-Bit Wild Canyon and Death Chamber.zip"
+		),
+		
+		ModFile(
+		    name: "Superflous Music Pack",
+		    description: "My crappy old music pack.",
+		    url: "https://gamebanana.com/dl/868538",
+		    version: "2.0.0",
+		    filename: "Superflous Music Pack.zip"
+		),
+	]
+)
+
+// Insert Persona joke here
