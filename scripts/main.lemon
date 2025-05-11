@@ -23,6 +23,8 @@ include persistentdata
 include scoremenu
 include superforms // By being a nosy person you just spoiled yourself on the secret.
 include obligatoryaudiostuff // Absolutely mandatory for any mod I make
+// What do you *MEAN* I have to remove the achievement stuff from the last commit because Airfreshener was cancelled!?! Then again, I was contributing to it but did barely anything...
+
 //include actselect // If you're using a version with support for the custom act select screen
 
 // Global variables
